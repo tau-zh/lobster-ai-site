@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>价格说明｜龙虾 AI 打工人</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    body { background: #ffffff; color: #1f2937; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .simple-header { padding: 2rem 0; }
+    .simple-header h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #111827; }
+    .simple-header p { color: #374151; font-size: 1.1rem; }
+    .simple-header a { color: #2563eb; font-weight: 500; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1rem; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem auto; }
+    .card { background: white; border: 1px solid #d1d5db; border-radius: 12px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .card h3 { color: #111827; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .price-card { text-align: center; position: relative; }
+    .price-card.featured { border: 2px solid #2563eb; box-shadow: 0 4px 12px rgba(37,99,235,0.15); }
+    .mini-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #2563eb; color: white; padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+    .price { font-size: 2.5rem; font-weight: 700; color: #1e40af; margin: 1rem 0; }
+    .price span { font-size: 1rem; color: #6b7280; font-weight: 400; }
+    .feature-list { list-style: none; padding: 0; margin: 1.5rem 0; text-align: left; }
+    .feature-list li { padding: 0.5rem 0; border-bottom: 1px solid #f3f4f6; color: #374151; }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list li:before { content: "✓"; color: #10b981; font-weight: bold; margin-right: 0.5rem; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; font-size: 1rem; transition: all 0.2s; }
+    .btn.primary { background: #2563eb; color: white; }
+    .btn.primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn { background: #f3f4f6; color: #1f2937; border: 1px solid #d1d5db; }
+    .btn:hover { background: #e5e7eb; transform: translateY(-1px); }
+    .section { padding: 3rem 0; }
+    .section.alt { background: #f9fafb; }
+    .section-label { font-size: 0.85rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+    .muted { color: #4b5563; }
+    .tip { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; color: #92400e; }
+    .tip strong { color: #78350f; }
+    .faq-list { max-width: 700px; margin: 2rem auto; }
+    .faq-item { margin: 1.5rem 0; }
+    .faq-item h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #111827; }
+    .faq-item p { color: #374151; line-height: 1.6; }
+    code { background: #f3f4f6; padding: 0.2rem 0.5rem; border-radius: 4px; font-family: monospace; font-size: 0.85em; color: #1f2937; border: 1px solid #e5e7eb; }
+    .bot-notice { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 1.5rem; margin: 2rem auto; text-align: center; }
+    .bot-notice h3 { color: #1e40af; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="simple-header container">
+    <a href="./index.html">← 返回首页</a>
+    <h1>💰 价格说明</h1>
+    <p>两种选择，按需使用。</p>
+  </div>
+
+  <main class="container">
+    <!-- 智能咨询机器人提示 -->
+    <div class="bot-notice">
+      <h3>🤖 智能咨询助手</h3>
+      <p class="muted">有任何问题？我们的 AI 助手 24 小时在线解答！</p>
+      <p style="margin-top:0.5rem;"><strong>免费咨询，自动回复，无需等待。</strong></p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- 免费版 -->
+      <div class="card price-card">
+        <h3>免费咨询</h3>
+        <div class="price">¥0</div>
+        <ul class="feature-list">
+          <li>AI 智能咨询助手</li>
+          <li>自动回复常见问题</li>
+          <li>产品功能介绍</li>
+          <li>部署流程指导</li>
+          <li>API 获取教程</li>
+          <li>7×24 小时在线</li>
+        </ul>
+        <a class="btn" href="./deploy.html">开始咨询</a>
+        <p class="muted small" style="margin-top:1rem;">💬 智能机器人自动回复</p>
+      </div>
+
+      <!-- 99 元套餐 -->
+      <div class="card price-card featured">
+        <div class="mini-badge">🔥 推荐</div>
+        <h3>一键部署套餐</h3>
+        <div class="price">¥99</div>
+        <ul class="feature-list">
+          <li>一键部署启动器</li>
+          <li>自动安装所有依赖</li>
+          <li>支持 Windows/macOS/Linux</li>
+          <li>接入 1 个大模型平台</li>
+          <li>配置社交软件集成</li>
+          <li>部署后 3 天技术支持</li>
+        </ul>
+        <a class="btn primary" href="./deploy.html">立即下载</a>
+        <p class="muted small" style="margin-top:1rem;">⚡ 下载启动器，双击完成部署</p>
+      </div>
+    </div>
+
+    <div class="tip">
+      <strong>💡 套餐说明：</strong>
+      <ul style="margin:0.5rem 0 0 0; padding-left:1.5rem;">
+        <li><strong>免费版：</strong>智能咨询机器人自动回复所有问题，包括产品咨询、部署指导、API 获取教程等</li>
+        <li><strong>¥99 套餐：</strong>下载一键部署启动器，双击即可完成全部部署，无需手动操作</li>
+        <li><strong>API 费用：</strong>大模型 API 使用费由平台收取（约 ¥10-50/月），与本服务无关</li>
+      </ul>
+    </div>
+  </main>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-label">常见问题</div>
+      <h2 style="margin-bottom:1.5rem;">你可能想问的</h2>
+      
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4>Q: 免费版和付费版有什么区别？</h4>
+          <p><strong>免费版：</strong>智能咨询机器人自动回复，解答产品咨询、部署流程、API 获取等问题。</p>
+          <p style="margin-top:0.5rem;"><strong>¥99 套餐：</strong>获得一键部署启动器，下载后双击即可完成全部部署，无需手动操作命令行。</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: 智能咨询机器人能回答什么问题？</h4>
+          <p>机器人可以回答：</p>
+          <ul style="margin-top:0.5rem; padding-left:1.5rem;">
+            <li>产品功能和使用场景</li>
+            <li>部署流程和步骤</li>
+            <li>API Key 获取方法</li>
+            <li>常见问题解答</li>
+            <li>技术支持联系方式</li>
+          </ul>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: 99 元是一次性费用吗？</h4>
+          <p>是的，99 元是一次性部署工具费用。部署完成后，龙虾 AI 就在你的电脑上运行了。后续只需承担模型 API 使用费（交给阿里云/MiniMax 等平台）。</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: API 费用贵吗？</h4>
+          <p>不贵。国产大模型价格已经很亲民：</p>
+          <ul style="margin-top:0.5rem; padding-left:1.5rem;">
+            <li>阿里云百炼 qwen-plus：约 ¥0.01-0.02 / 千 tokens</li>
+            <li>MiniMax abab6.5s：约 ¥0.01-0.03 / 千 tokens</li>
+            <li>DeepSeek：约 ¥0.01-0.02 / 千 tokens</li>
+          </ul>
+          <p style="margin-top:0.5rem;">日常使用每月约 ¥10-50。</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: 部署后不会用怎么办？</h4>
+          <p>部署完成后，浏览器访问 <code>http://localhost:18789</code> 即可使用。如有问题，可继续咨询智能助手，或查看网站上的教程文档。</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: 支持哪些系统？</h4>
+          <p>一键部署启动器支持：</p>
+          <ul style="margin-top:0.5rem; padding-left:1.5rem;">
+            <li><strong>Windows：</strong>Win10/11（自动安装 WSL）</li>
+            <li><strong>macOS：</strong>10.15 或更高（支持 M1/M2/M3）</li>
+            <li><strong>Linux：</strong>Ubuntu/Debian/Fedora 等主流发行版</li>
+          </ul>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: 如何联系人工支持？</h4>
+          <p>智能助手无法解答的问题，我们会引导你联系人工支持。一般情况下，机器人可以解决大部分常见问题。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="card" style="text-align:center;">
+      <h2 style="margin-bottom:0.5rem;">准备好开始了吗？</h2>
+      <p class="muted" style="margin-bottom:1.5rem;">免费咨询，或 ¥99 完成部署。</p>
+      <a class="btn primary" href="./deploy.html" style="font-size:1.1rem;">🚀 开始部署</a>
+      <p class="muted" style="margin-top:1rem;">或先 <a href="./api-key-guide.html" style="color:#2563eb;">获取 API Key</a></p>
+    </div>
+  </section>
+</body>
+</html>

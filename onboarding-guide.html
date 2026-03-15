@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>新手入门路线图｜龙虾 AI 打工人</title>
+  <meta name="description" content="从 0 到 1 使用龙虾 AI 的完整路线图，包含图文教程和视频脚本">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .guide-section { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+    .guide-section h1 { font-size: 2rem; margin-bottom: 1rem; color: #1a1a1a; }
+    .guide-section h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: #2563eb; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+    .guide-section h3 { font-size: 1.2rem; margin: 1.5rem 0 0.8rem; color: #374151; }
+    .roadmap { position: relative; padding-left: 2rem; }
+    .roadmap-item { position: relative; padding-left: 2rem; margin: 1.5rem 0; }
+    .roadmap-item:before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: #e5e7eb; }
+    .roadmap-item:last-child:before { bottom: 50%; }
+    .roadmap-item:after { content: "📍"; position: absolute; left: -6px; top: 0; background: white; }
+    .roadmap-item.done:after { content: "✅"; }
+    .roadmap-item.current:after { content: "🎯"; }
+    .phase-card { border: 2px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; background: #f9fafb; }
+    .phase-card h3 { margin-top: 0; color: #1e40af; }
+    .phase-card .phase-number { display: inline-block; background: #2563eb; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; }
+    .checklist { list-style: none; padding: 0; }
+    .checklist li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
+    .checklist li:before { content: "□"; position: absolute; left: 0; color: #2563eb; font-weight: bold; }
+    .checklist li.done:before { content: "✓"; color: #10b981; }
+    .tip { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .warning { background: #fee2e2; border-left: 4px solid #ef4444; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .success { background: #d1fae5; border-left: 4px solid #10b981; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .video-script { background: #1f2937; color: #f3f4f6; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; font-family: monospace; font-size: 0.9em; line-height: 1.6; }
+    .video-script h4 { color: #10b981; margin-top: 0; }
+    .video-script .timestamp { color: #f59e0b; }
+    .nav-link { display: inline-block; margin-top: 2rem; color: #2563eb; text-decoration: none; }
+    .nav-link:hover { text-decoration: underline; }
+    .time-estimate { display: inline-block; background: #dbeafe; color: #1e40af; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; margin-left: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">🦞 龙虾 AI 打工人</a>
+      <div class="nav-links">
+        <a href="deploy.html">部署指南</a>
+        <a href="api-key-guide.html">API Key 教程</a>
+        <a href="windows-wsl-guide.html">Windows 安装</a>
+        <a href="faq.html">常见问题</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="guide-section">
+    <h1>🗺️ 新手入门路线图</h1>
+    <p class="lead">从 0 到 1 使用龙虾 AI 的完整路径。按顺序完成每个阶段，预计总耗时 30-60 分钟。</p>
+
+    <div class="tip">
+      <strong>💡 使用建议：</strong>
+      <ul>
+        <li>不要跳步 — 每一步都建立在前一步的基础上</li>
+        <li>遇到问题先看当前页面的"常见问题"部分</li>
+        <li>完成每个阶段后休息一下，不要一次性做完</li>
+      </ul>
+    </div>
+
+    <h2>📍 完整路线图</h2>
+    <div class="roadmap">
+      <div class="roadmap-item done">
+        <strong>阶段 0：准备</strong> — 确认系统要求、准备账号
+      </div>
+      <div class="roadmap-item done">
+        <strong>阶段 1：获取 API Key</strong> — 选择平台、注册、获取密钥
+      </div>
+      <div class="roadmap-item current">
+        <strong>阶段 2：安装环境</strong> — 根据你的系统选择安装方式
+      </div>
+      <div class="roadmap-item">
+        <strong>阶段 3：配置项目</strong> — 填入 API Key、测试连接
+      </div>
+      <div class="roadmap-item">
+        <strong>阶段 4：启动服务</strong> — 运行项目、验证功能
+      </div>
+      <div class="roadmap-item">
+        <strong>阶段 5：日常使用</strong> — 配置自动化、监控状态
+      </div>
+    </div>
+
+    <h2>📦 阶段 0：准备</h2>
+    <div class="phase-card">
+      <span class="phase-number">阶段 0</span>
+      <span class="time-estimate">预计 5 分钟</span>
+      <h3>开始前需要准备的</h3>
+      <ul class="checklist">
+        <li class="done">一台电脑（macOS / Windows / Linux 均可）</li>
+        <li class="done">稳定的网络连接</li>
+        <li class="done">一个手机号（用于接收验证码）</li>
+        <li class="done">支付宝或微信（用于实名认证）</li>
+        <li class="done">大约 30-60 分钟完整时间</li>
+      </ul>
+    </div>
+
+    <div class="tip">
+      <strong>💡 系统选择：</strong>
+      <ul>
+        <li><strong>macOS：</strong>最省心，直接看 <a href="deploy.html">部署指南</a></li>
+        <li><strong>Windows：</strong>推荐用 WSL2，看 <a href="windows-wsl-guide.html">Windows 安装指南</a></li>
+        <li><strong>Linux：</strong>和 macOS 类似，看 <a href="deploy.html">部署指南</a></li>
+      </ul>
+    </div>
+
+    <h2>🔑 阶段 1：获取 API Key</h2>
+    <div class="phase-card">
+      <span class="phase-number">阶段 1</span>
+      <span class="time-estimate">预计 10-15 分钟</span>
+      <h3>选择一个平台开始</h3>
+      
+      <p><strong>推荐新手：阿里百炼（通义千问）</strong></p>
+      <ul>
+        <li>国内访问快</li>
+        <li>中文效果好</li>
+        <li>有免费额度</li>
+        <li>文档完善</li>
+      </ul>
+
+      <p><strong>备选：MiniMax（海螺 AI）</strong></p>
+      <ul>
+        <li>模型能力强</li>
+        <li>适合创意写作</li>
+        <li>适合角色扮演</li>
+      </ul>
+    </div>
+
+    <div class="success">
+      <strong>✅ 完成标志：</strong>你手上有一个以 <code>sk-</code> 开头的 API Key，并且已经安全保存。
+    </div>
+
+    <p>👉 <a href="api-key-guide.html">查看详细 API Key 获取教程</a></p>
+
+    <h2>💻 阶段 2：安装环境</h2>
+    <div class="phase-card">
+      <span class="phase-number">阶段 2</span>
+      <span class="time-estimate">预计 15-20 分钟</span>
+      <h3>根据你的系统选择</h3>
+      
+      <h4>🍎 macOS 用户</h4>
+      <ul class="checklist">
+        <li>安装 Homebrew（如果还没有）</li>
+        <li>安装 Git、Node.js、pnpm</li>
+        <li>克隆项目代码</li>
+      </ul>
+
+      <h4>🪟 Windows 用户</h4>
+      <ul class="checklist">
+        <li>启用 WSL2 功能</li>
+        <li>安装 Ubuntu</li>
+        <li>在 Ubuntu 中安装 Git、Node.js、pnpm</li>
+        <li>克隆项目代码</li>
+      </ul>
+
+      <h4>🐧 Linux 用户</h4>
+      <ul class="checklist">
+        <li>使用包管理器安装 Git、Node.js、pnpm</li>
+        <li>克隆项目代码</li>
+      </ul>
+    </div>
+
+    <div class="success">
+      <strong>✅ 完成标志：</strong>在终端中输入 <code>node --version</code> 和 <code>pnpm --version</code> 都能正常显示版本号。
+    </div>
+
+    <p>👉 <a href="deploy.html">查看详细部署指南</a> | <a href="windows-wsl-guide.html">Windows 用户点这里</a></p>
+
+    <h2>⚙️ 阶段 3：配置项目</h2>
+    <div class="phase-card">
+      <span class="phase-number">阶段 3</span>
+      <span class="time-estimate">预计 5 分钟</span>
+      <h3>填入 API Key 并测试</h3>
+      <ul class="checklist">
+        <li>复制环境变量示例文件</li>
+        <li>编辑配置文件，填入 API Key</li>
+        <li>选择模型（推荐 qwen-max 或 qwen-plus）</li>
+        <li>保存配置</li>
+      </ul>
+    </div>
+
+    <div class="warning">
+      <strong>⚠️ 注意：</strong>
+      <ul>
+        <li>API Key 不要分享到公开场合</li>
+        <li>配置文件不要提交到 Git</li>
+        <li>如果 Key 泄露，立即到平台删除并重新创建</li>
+      </ul>
+    </div>
+
+    <div class="success">
+      <strong>✅ 完成标志：</strong>配置文件已保存，API Key 已填入正确位置。
+    </div>
+
+    <h2>🚀 阶段 4：启动服务</h2>
+    <div class="phase-card">
+      <span class="phase-number">阶段 4</span>
+      <span class="time-estimate">预计 5 分钟</span>
+      <h3>运行并验证</h3>
+      <ul class="checklist">
+        <li>在项目目录运行启动命令</li>
+        <li>等待服务启动完成</li>
+        <li>在浏览器中访问本地地址</li>
+        <li>测试基本功能</li>
+      </ul>
+    </div>
+
+    <div class="success">
+      <strong>✅ 完成标志：</strong>在浏览器中看到龙虾 AI 的界面，并能正常使用。
+    </div>
+
+    <h2>📈 阶段 5：日常使用</h2>
+    <div class="phase-card">
+      <span class="phase-number">阶段 5</span>
+      <span class="time-estimate">持续进行</span>
+      <h3>配置自动化和监控</h3>
+      <ul class="checklist">
+        <li>配置开机自启动（可选）</li>
+        <li>设置额度提醒（在 API 平台）</li>
+        <li>定期检查服务状态</li>
+        <li>根据需求调整模型和配置</li>
+      </ul>
+    </div>
+
+    <h2>🎬 视频教程脚本（供参考）</h2>
+    <p>以下是为完全零基础用户设计的视频教程脚本，每个视频 3-5 分钟。</p>
+
+    <div class="video-script">
+      <h4>📹 视频 1：获取阿里百炼 API Key（5 分钟）</h4>
+      <p><span class="timestamp">[0:00]</span> 开场：今天教大家如何获取阿里百炼的 API Key</p>
+      <p><span class="timestamp">[0:15]</span> 打开浏览器，访问 bailian.console.aliyun.com</p>
+      <p><span class="timestamp">[0:30]</span> 登录/注册阿里云账号（演示手机号登录）</p>
+      <p><span class="timestamp">[1:00]</span> 完成实名认证（演示支付宝认证）</p>
+      <p><span class="timestamp">[1:30]</span> 找到 API-KEY 管理页面</p>
+      <p><span class="timestamp">[2:00]</span> 创建新的 API Key，起名 lobster-ai</p>
+      <p><span class="timestamp">[2:30]</span> ⚠️ 强调：Key 只显示一次，立即复制保存</p>
+      <p><span class="timestamp">[3:00]</span> 开通模型服务（Qwen-Max 或 Qwen-Plus）</p>
+      <p><span class="timestamp">[3:30]</span> 查看免费额度和充值入口</p>
+      <p><span class="timestamp">[4:00]</span> 总结 + 下一步看安装教程</p>
+    </div>
+
+    <div class="video-script">
+      <h4>📹 视频 2：Windows 安装 WSL2（5 分钟）</h4>
+      <p><span class="timestamp">[0:00]</span> 开场：Windows 用户如何用 WSL2 运行龙虾 AI</p>
+      <p><span class="timestamp">[0:20]</span> 检查 Windows 版本（设置 → 系统 → 关于）</p>
+      <p><span class="timestamp">[0:45]</span> 以管理员身份打开 PowerShell</p>
+      <p><span class="timestamp">[1:00]</span> 运行 wsl --install 命令</p>
+      <p><span class="timestamp">[1:30]</span> 等待安装完成，然后重启电脑</p>
+      <p><span class="timestamp">[2:00]</span> 重启后首次启动 Ubuntu</p>
+      <p><span class="timestamp">[2:30]</span> 创建用户名和密码（强调密码不显示是正常的）</p>
+      <p><span class="timestamp">[3:00]</span> 安装 Git：sudo apt install -y git</p>
+      <p><span class="timestamp">[3:30]</span> 安装 Node.js（用 nvm）</p>
+      <p><span class="timestamp">[4:00]</span> 安装 pnpm</p>
+      <p><span class="timestamp">[4:30]</span> 验证安装成功</p>
+    </div>
+
+    <div class="video-script">
+      <h4>📹 视频 3：克隆代码并启动（4 分钟）</h4>
+      <p><span class="timestamp">[0:00]</span> 开场：代码下载和启动</p>
+      <p><span class="timestamp">[0:20]</span> 创建项目文件夹：mkdir -p ~/projects</p>
+      <p><span class="timestamp">[0:40]</span> 克隆代码：git clone ...</p>
+      <p><span class="timestamp">[1:00]</span> 进入项目目录</p>
+      <p><span class="timestamp">[1:15]</span> 安装依赖：pnpm install</p>
+      <p><span class="timestamp">[1:45]</span> 复制配置文件：cp .env.example .env</p>
+      <p><span class="timestamp">[2:00]</span> 编辑配置文件，填入 API Key</p>
+      <p><span class="timestamp">[2:45]</span> 启动服务：pnpm dev</p>
+      <p><span class="timestamp">[3:15]</span> 在浏览器访问 localhost:5173</p>
+      <p><span class="timestamp">[3:45]</span> 成功！总结 + 常见问题链接</p>
+    </div>
+
+    <div class="video-script">
+      <h4>📹 视频 4：常见问题排查（5 分钟）</h4>
+      <p><span class="timestamp">[0:00]</span> 开场：遇到问题不要慌，这里帮你解决</p>
+      <p><span class="timestamp">[0:20]</span> 问题 1：wsl 命令找不到 → 检查 Windows 版本 + 重启</p>
+      <p><span class="timestamp">[1:00]</span> 问题 2：网络无法访问 → 重启 WSL 网络</p>
+      <p><span class="timestamp">[1:40]</span> 问题 3：node 找不到 → source ~/.bashrc</p>
+      <p><span class="timestamp">[2:20]</span> 问题 4：权限不足 → chown 修复</p>
+      <p><span class="timestamp">[3:00]</span> 问题 5：端口被占用 → 换端口或关闭占用程序</p>
+      <p><span class="timestamp">[3:40]</span> 问题 6：API Key 无效 → 检查是否复制完整</p>
+      <p><span class="timestamp">[4:20]</span> 还有其他问题？查看 FAQ 页面或联系支持</p>
+    </div>
+
+    <div class="tip">
+      <strong>📝 视频制作建议：</strong>
+      <ul>
+        <li>每个视频控制在 5 分钟以内</li>
+        <li>关键步骤要有文字标注</li>
+        <li>敏感信息（如 API Key）要打码</li>
+        <li>视频下方放对应的图文教程链接</li>
+        <li>提供字幕文件，方便用户搜索</li>
+      </ul>
+    </div>
+
+    <h2>📚 相关文档</h2>
+    <ul>
+      <li><a href="deploy.html">完整部署指南</a></li>
+      <li><a href="api-key-guide.html">API Key 获取教程</a></li>
+      <li><a href="windows-wsl-guide.html">Windows WSL2 安装指南</a></li>
+      <li><a href="faq.html">常见问题解答</a></li>
+    </ul>
+
+    <a href="deploy.html" class="nav-link">← 返回部署指南</a>
+    <a href="index.html" class="nav-link">返回首页</a>
+  </main>
+
+  <footer>
+    <p>🦞 龙虾 AI 打工人 — 让 AI 为你工作</p>
+  </footer>
+</body>
+</html>

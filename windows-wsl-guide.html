@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows 安装指南（WSL2）｜龙虾 AI 打工人</title>
+  <meta name="description" content="Windows 用户使用 WSL2 安装龙虾 AI 的完整教程，一步一步跟着做就能成功">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .guide-section { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+    .guide-section h1 { font-size: 2rem; margin-bottom: 1rem; color: #1a1a1a; }
+    .guide-section h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: #2563eb; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
+    .guide-section h3 { font-size: 1.2rem; margin: 1.5rem 0 0.8rem; color: #374151; }
+    .step { background: #f9fafb; border-left: 4px solid #2563eb; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .step-number { display: inline-block; background: #2563eb; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: bold; margin-right: 0.5rem; }
+    .tip { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .warning { background: #fee2e2; border-left: 4px solid #ef4444; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .success { background: #d1fae5; border-left: 4px solid #10b981; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    code { background: #f3f4f6; padding: 0.2rem 0.5rem; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+    .cmd { background: #1f2937; color: #10b981; padding: 1rem 1.5rem; border-radius: 8px; font-family: monospace; margin: 1rem 0; overflow-x: auto; }
+    .nav-link { display: inline-block; margin-top: 2rem; color: #2563eb; text-decoration: none; }
+    .nav-link:hover { text-decoration: underline; }
+    .checklist { list-style: none; padding: 0; }
+    .checklist li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
+    .checklist li:before { content: "✓"; position: absolute; left: 0; color: #10b981; font-weight: bold; }
+    .trouble-card { border: 2px solid #fca5a5; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; background: #fef2f2; }
+    .trouble-card h4 { margin-top: 0; color: #dc2626; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">🦞 龙虾 AI 打工人</a>
+      <div class="nav-links">
+        <a href="deploy.html">部署指南</a>
+        <a href="api-key-guide.html">API Key 教程</a>
+        <a href="faq.html">常见问题</a>
+        <a href="pricing.html">价格参考</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="guide-section">
+    <h1>🪟 Windows 安装指南（WSL2）</h1>
+    <p class="lead">本教程专为 Windows 用户设计，使用 WSL2（Windows Subsystem for Linux）在 Windows 上运行龙虾 AI。不需要懂 Linux，跟着步骤做即可。</p>
+
+    <div class="tip">
+      <strong>💡 为什么用 WSL2？</strong>
+      <ul>
+        <li>在 Windows 上获得完整的 Linux 环境</li>
+        <li>和 macOS/Linux 用户使用体验一致</li>
+        <li>避免 Windows 特有的各种兼容性问题</li>
+        <li>微软官方支持，稳定可靠</li>
+      </ul>
+    </div>
+
+    <div class="warning">
+      <strong>⚠️ 系统要求：</strong>
+      <ul>
+        <li>Windows 10 版本 2004 或更高（或 Windows 11）</li>
+        <li>至少 8GB 内存（推荐 16GB）</li>
+        <li>至少 20GB 可用磁盘空间</li>
+        <li>需要管理员权限</li>
+      </ul>
+    </div>
+
+    <h2>📋 安装步骤总览</h2>
+    <ul class="checklist">
+      <li>启用 WSL2 功能</li>
+      <li>安装 Ubuntu</li>
+      <li>安装 Git、Node.js、pnpm</li>
+      <li>克隆项目代码</li>
+      <li>安装依赖并配置</li>
+      <li>启动服务</li>
+    </ul>
+
+    <h2>第 1 步：启用 WSL2 功能</h2>
+    
+    <h3>1.1 以管理员身份打开 PowerShell</h3>
+    <div class="step">
+      <span class="step-number">1</span>
+      按 <code>Win + X</code>，选择 <strong>"Windows PowerShell (管理员)"</strong> 或 <strong>"终端 (管理员)"</strong>。
+    </div>
+    <div class="tip">
+      <strong>📝 提示：</strong>如果看到用户账户控制提示，点击"是"。
+    </div>
+
+    <h3>1.2 运行 WSL 安装命令</h3>
+    <div class="step">
+      <span class="step-number">2</span>
+      在 PowerShell 中输入以下命令，按回车：
+    </div>
+    <div class="cmd">wsl --install</div>
+    <div class="step">
+      <span class="step-number">3</span>
+      等待安装完成。这个过程可能需要几分钟，会自动：
+      <ul>
+        <li>启用 WSL 功能</li>
+        <li>启用虚拟机平台功能</li>
+        <li>下载并安装 Ubuntu（默认版本）</li>
+      </ul>
+    </div>
+
+    <h3>1.3 重启电脑</h3>
+    <div class="step">
+      <span class="step-number">4</span>
+      安装完成后，<strong>必须重启电脑</strong>才能生效。
+    </div>
+    <div class="warning">
+      <strong>⚠️ 重要：</strong>不要跳过重启！很多用户没重启导致后续步骤失败。
+    </div>
+
+    <h2>第 2 步：设置 Ubuntu 用户</h2>
+
+    <h3>2.1 首次启动 Ubuntu</h3>
+    <div class="step">
+      <span class="step-number">1</span>
+      重启后，系统会自动打开 Ubuntu 窗口。如果没有，按 <code>Win</code> 键，搜索 <strong>"Ubuntu"</strong> 并打开。
+    </div>
+
+    <h3>2.2 创建用户名和密码</h3>
+    <div class="step">
+      <span class="step-number">2</span>
+      按提示输入用户名（建议用英文，比如 <code>siwei</code>），按回车。
+    </div>
+    <div class="step">
+      <span class="step-number">3</span>
+      输入密码。<strong>注意：输入密码时屏幕上不会显示任何字符</strong>，这是正常的，输完按回车即可。
+    </div>
+    <div class="step">
+      <span class="step-number">4</span>
+      再次输入密码确认，按回车。
+    </div>
+    <div class="success">
+      <strong>✅ 完成！</strong>现在你已经进入 Ubuntu 系统了。你会看到类似 <code>username@DESKTOP-XXXX:~$</code> 的提示符。
+    </div>
+
+    <h2>第 3 步：安装必要软件</h2>
+
+    <h3>3.1 更新软件包列表</h3>
+    <div class="step">
+      <span class="step-number">1</span>
+      在 Ubuntu 窗口中，输入以下命令：
+    </div>
+    <div class="cmd">sudo apt update && sudo apt upgrade -y</div>
+    <div class="tip">
+      <strong>📝 提示：</strong>输入密码时不会显示字符，输完按回车。这个过程可能需要几分钟。
+    </div>
+
+    <h3>3.2 安装 Git</h3>
+    <div class="cmd">sudo apt install -y git</div>
+    <div class="step">
+      <span class="step-number">2</span>
+      验证安装：
+    </div>
+    <div class="cmd">git --version</div>
+    <div class="tip">
+      <strong>✅ 成功标志：</strong>显示类似 <code>git version 2.x.x</code>
+    </div>
+
+    <h3>3.3 安装 Node.js（使用 nvm）</h3>
+    <div class="step">
+      <span class="step-number">3</span>
+      安装 nvm（Node 版本管理器）：
+    </div>
+    <div class="cmd">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash</div>
+    <div class="step">
+      <span class="step-number">4</span>
+      重新加载配置：
+    </div>
+    <div class="cmd">source ~/.bashrc</div>
+    <div class="step">
+      <span class="step-number">5</span>
+      安装 Node.js 20（推荐版本）：
+    </div>
+    <div class="cmd">nvm install 20</div>
+    <div class="step">
+      <span class="step-number">6</span>
+      验证安装：
+    </div>
+    <div class="cmd">node --version && npm --version</div>
+    <div class="tip">
+      <strong>✅ 成功标志：</strong>显示 <code>v20.x.x</code> 和 npm 版本号
+    </div>
+
+    <h3>3.4 安装 pnpm</h3>
+    <div class="cmd">npm install -g pnpm</div>
+    <div class="step">
+      <span class="step-number">7</span>
+      验证安装：
+    </div>
+    <div class="cmd">pnpm --version</div>
+
+    <h2>第 4 步：克隆项目代码</h2>
+
+    <h3>4.1 选择代码存放位置</h3>
+    <div class="step">
+      <span class="step-number">1</span>
+      在你的用户目录下创建项目文件夹：
+    </div>
+    <div class="cmd">cd ~ && mkdir -p projects && cd projects</div>
+
+    <h3>4.2 克隆代码</h3>
+    <div class="step">
+      <span class="step-number">2</span>
+      输入克隆命令（替换成实际的项目地址）：
+    </div>
+    <div class="cmd">git clone https://github.com/你的项目地址.git</div>
+    <div class="tip">
+      <strong>📝 提示：</strong>如果是私有仓库，需要配置 SSH 或使用带 token 的 HTTPS 地址。
+    </div>
+
+    <h3>4.3 进入项目目录</h3>
+    <div class="cmd">cd 项目文件夹名</div>
+
+    <h2>第 5 步：安装依赖并配置</h2>
+
+    <h3>5.1 安装项目依赖</h3>
+    <div class="cmd">pnpm install</div>
+    <div class="tip">
+      <strong>📝 提示：</strong>第一次安装可能需要几分钟，等待完成。
+    </div>
+
+    <h3>5.2 配置 API Key</h3>
+    <div class="step">
+      <span class="step-number">1</span>
+      复制环境变量示例文件：
+    </div>
+    <div class="cmd">cp .env.example .env</div>
+    <div class="step">
+      <span class="step-number">2</span>
+      编辑配置文件：
+    </div>
+    <div class="cmd">nano .env</div>
+    <div class="tip">
+      <strong>📝 提示：</strong>在 nano 编辑器中，用方向键移动，修改后按 <code>Ctrl+O</code> 保存，<code>Ctrl+X</code> 退出。
+    </div>
+    <div class="step">
+      <span class="step-number">3</span>
+      填入你的 API Key（参考 <a href="api-key-guide.html">API Key 教程</a>）：
+    </div>
+    <div class="cmd">DASHSCOPE_API_KEY=sk-你的 key</div>
+
+    <h2>第 6 步：启动服务</h2>
+
+    <h3>6.1 启动开发服务器</h3>
+    <div class="cmd">pnpm dev</div>
+    <div class="success">
+      <strong>✅ 成功标志：</strong>看到类似 <code>Server running at http://localhost:5173</code> 的提示
+    </div>
+
+    <h3>6.2 在浏览器中访问</h3>
+    <div class="step">
+      <span class="step-number">1</span>
+      打开 Windows 的浏览器（Chrome/Edge 等）
+    </div>
+    <div class="step">
+      <span class="step-number">2</span>
+      访问 <code>http://localhost:5173</code>
+    </div>
+    <div class="tip">
+      <strong>📝 提示：</strong>WSL2 中运行的服务可以直接通过 localhost 在 Windows 浏览器中访问。
+    </div>
+
+    <h2>🔧 常见问题排查</h2>
+
+    <div class="trouble-card">
+      <h4>❌ "wsl: 无法将 wsl 项识别为 cmdlet"</h4>
+      <p><strong>原因：</strong>WSL 功能未启用或系统版本太旧</p>
+      <p><strong>解决：</strong></p>
+      <ol>
+        <li>确认 Windows 版本是 2004 或更高（设置 → 系统 → 关于）</li>
+        <li>以管理员身份运行 PowerShell，执行：<code>wsl --install</code></li>
+        <li>重启电脑</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <h4>❌ "无法访问网络" 或 "下载失败"</h4>
+      <p><strong>原因：</strong>WSL2 网络配置问题</p>
+      <p><strong>解决：</strong></p>
+      <ol>
+        <li>在 Ubuntu 中执行：<code>sudo service networking restart</code></li>
+        <li>或者重启 WSL：<code>wsl --shutdown</code>（在 PowerShell 中执行），然后重新打开 Ubuntu</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <h4>❌ "node: command not found"</h4>
+      <p><strong>原因：</strong>nvm 未正确加载</p>
+      <p><strong>解决：</strong></p>
+      <ol>
+        <li>执行：<code>source ~/.bashrc</code></li>
+        <li>再执行：<code>node --version</code> 验证</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <h4>❌ "权限不足" 或 "Permission denied"</h4>
+      <p><strong>原因：</strong>文件权限问题</p>
+      <p><strong>解决：</strong></p>
+      <ol>
+        <li>在项目目录执行：<code>sudo chown -R $USER:$USER .</code></li>
+        <li>或者用 <code>sudo</code> 运行命令（不推荐长期使用）</li>
+      </ol>
+    </div>
+
+    <div class="trouble-card">
+      <h4>❌ 端口被占用</h4>
+      <p><strong>原因：</strong>5173 端口已被其他程序使用</p>
+      <p><strong>解决：</strong></p>
+      <ol>
+        <li>换一个端口启动，比如：<code>pnpm dev -- --port 5174</code></li>
+        <li>或者关闭占用端口的程序</li>
+      </ol>
+    </div>
+
+    <h2>📚 下一步</h2>
+    <ul class="checklist">
+      <li>服务启动后，参考 <a href="deploy.html">部署指南</a> 配置完整功能</li>
+      <li>还没有 API Key？看 <a href="api-key-guide.html">API Key 教程</a></li>
+      <li>遇到问题？查看 <a href="faq.html">常见问题</a></li>
+    </ul>
+
+    <a href="deploy.html" class="nav-link">← 返回部署指南</a>
+    <a href="index.html" class="nav-link">返回首页</a>
+  </main>
+
+  <footer>
+    <p>🦞 龙虾 AI 打工人 — 让 AI 为你工作</p>
+  </footer>
+</body>
+</html>
