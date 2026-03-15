@@ -3,390 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>龙虾 AI 一键部署向导｜3 分钟完成</title>
-  <meta name="description" content="填写信息，获取 API Key，一键命令完成本地部署">
+  <title>页面已迁移｜龙虾 AI 打工人</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
+  <meta http-equiv="refresh" content="3;url=./deploy.html" />
   <style>
-    .simple-header { padding: 2rem 0; }
-    .simple-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-    .simple-header p { color: #6b7280; font-size: 1.1rem; }
-    .container { max-width: 900px; margin: 0 auto; padding: 0 1rem; }
-    .wizard-steps { display: flex; justify-content: space-between; margin-bottom: 2rem; }
-    .step { flex: 1; text-align: center; padding: 1rem; position: relative; }
-    .step:not(:last-child):after { content: "→"; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: #9ca3af; }
-    .step-num { display: inline-block; width: 36px; height: 36px; border-radius: 50%; background: #e5e7eb; color: #6b7280; font-weight: 600; line-height: 36px; margin-bottom: 0.5rem; }
-    .step.active .step-num { background: #2563eb; color: white; }
-    .step.done .step-num { background: #10b981; color: white; }
-    .step-title { font-size: 0.9rem; font-weight: 500; }
-    .form-wrap { display: grid; gap: 1.5rem; }
-    .card { background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; }
-    .form-card label { display: block; margin-bottom: 1rem; }
-    .form-card input, .form-card select, .form-card textarea { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; margin-top: 0.5rem; box-sizing: border-box; }
-    .form-card textarea { resize: vertical; font-family: inherit; }
-    .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; font-size: 1rem; }
-    .btn.primary { background: #2563eb; color: white; }
-    .btn.primary:hover { background: #1d4ed8; }
-    .btn.success { background: #10b981; color: white; }
-    .btn.success:hover { background: #059669; }
-    .result-card { background: #1f2937; color: #10b981; }
-    .result-card h3 { color: #f3f4f6; }
-    .result-card textarea { background: #111827; color: #10b981; border: 1px solid #374151; font-family: monospace; font-size: 0.85rem; }
-    .result-card .cmd { background: #111827; border: 1px solid #374151; border-radius: 8px; padding: 1rem; font-family: monospace; font-size: 0.85rem; overflow-x: auto; margin: 1rem 0; }
-    .tip { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-    .tip a { color: #2563eb; text-decoration: underline; }
-    .success-box { background: #d1fae5; border-left: 4px solid #10b981; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-    .hidden { display: none; }
-    .checkbox { display: flex; align-items: flex-start; gap: 0.5rem; }
-    .checkbox input { width: auto; margin-top: 0.25rem; }
-    .social-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 0.5rem; }
-    .social-option { border: 2px solid #e5e7eb; border-radius: 8px; padding: 0.75rem; text-align: center; cursor: pointer; }
-    .social-option:hover { border-color: #2563eb; }
-    .social-option.selected { border-color: #2563eb; background: #eff6ff; }
-    .social-option input { display: none; }
-    .social-icon { font-size: 1.5rem; display: block; margin-bottom: 0.25rem; }
-    .social-name { font-size: 0.85rem; font-weight: 500; }
-    @media (max-width: 640px) {
-      .wizard-steps { flex-direction: column; }
-      .step:not(:last-child):after { content: "↓"; right: 50%; top: auto; bottom: 0; transform: translateX(50%); }
-      .social-options { grid-template-columns: 1fr; }
-    }
+    body { background: #ffffff; color: #1f2937; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .container { max-width: 600px; margin: 0 auto; padding: 4rem 1rem; text-align: center; }
+    .card { background: white; border: 1px solid #d1d5db; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; font-size: 1.75rem; margin-bottom: 1rem; }
+    p { color: #374151; line-height: 1.6; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #2563eb; color: white; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 1.5rem; transition: all 0.2s; }
+    .btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .features { text-align: left; background: #f9fafb; padding: 1rem 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+    .features li { padding: 0.5rem 0; color: #374151; }
+    .features li:before { content: "✅ "; }
   </style>
 </head>
 <body>
-  <div class="simple-header container">
-    <a href="./index.html">← 返回首页</a>
-    <h1>🦞 龙虾 AI 一键部署向导</h1>
-    <p>3 个步骤，3 分钟完成本地部署。</p>
-  </div>
-
   <div class="container">
-    <div class="wizard-steps">
-      <div class="step active" id="step1-indicator">
-        <span class="step-num">1</span>
-        <div class="step-title">填写信息</div>
-      </div>
-      <div class="step" id="step2-indicator">
-        <span class="step-num">2</span>
-        <div class="step-title">获取 API Key</div>
-      </div>
-      <div class="step" id="step3-indicator">
-        <span class="step-num">3</span>
-        <div class="step-title">一键部署</div>
-      </div>
-    </div>
-  </div>
-
-  <main class="container form-wrap" style="margin-bottom:3rem;">
-    <!-- Step 1: 填写信息 -->
-    <div class="card form-card" id="step1">
-      <h3 style="margin-top:0;">📝 第 1 步：填写你的信息</h3>
+    <div class="card">
+      <h1>🚀 页面已迁移</h1>
+      <p>一键部署功能已升级到新页面，请点击下方按钮前往。</p>
       
-      <label>怎么称呼你？<input id="name" required placeholder="比如：小王" /></label>
-      
-      <label>你的电脑系统
-        <select id="os" required>
-          <option value="">请选择</option>
-          <option value="macos">macOS (苹果电脑)</option>
-          <option value="windows-wsl">Windows (使用 WSL)</option>
-          <option value="linux">Linux (Ubuntu/Debian 等)</option>
-        </select>
-      </label>
-      
-      <div id="wsl-tip" class="tip hidden">
-        <strong>📌 Windows 用户注意：</strong>需要先安装 WSL2。如果还没安装，请先看 <a href="./windows-wsl-guide.html" target="_blank">WSL2 安装教程</a>。
-      </div>
-      
-      <label>你想让 AI 主要帮你做什么？<textarea id="goal" rows="3" required placeholder="比如：帮我写小红书文案、整理笔记、回复消息、查资料..."></textarea></label>
-      
-      <label>选择要接入的大模型平台
-        <select id="model-provider" required>
-          <option value="">请选择</option>
-          <option value="aliyun">阿里云百炼（通义千问）- 推荐新手</option>
-          <option value="minimax">MiniMax（海螺 AI）</option>
-          <option value="deepseek">DeepSeek（深度求索）</option>
-          <option value="zhipu">智谱 AI</option>
-          <option value="volcengine">火山方舟（字节）</option>
-        </select>
-      </label>
-      
-      <div id="model-tip" class="tip hidden">
-        <strong>💡 还没有 API Key？</strong> 下一步会教你免费获取，先继续填写。
-      </div>
-      
-      <label>选择要集成的社交软件（可选）
-        <div class="social-options">
-          <label class="social-option">
-            <input type="checkbox" name="social" value="feishu" />
-            <span class="social-icon">🚀</span>
-            <span class="social-name">飞书</span>
-          </label>
-          <label class="social-option">
-            <input type="checkbox" name="social" value="qq" />
-            <span class="social-icon">🐧</span>
-            <span class="social-name">QQ</span>
-          </label>
-          <label class="social-option">
-            <input type="checkbox" name="social" value="wechat" />
-            <span class="social-icon">💬</span>
-            <span class="social-name">微信</span>
-          </label>
-        </div>
-      </label>
-      <p class="muted small" style="margin-top:0.5rem;">选择后可在对应社交软件中与龙虾对话（高级功能，可稍后配置）</p>
-      
-      <div style="margin-top:1.5rem;">
-        <button class="btn primary" onclick="goToStep2()">下一步：获取 API Key</button>
-      </div>
-    </div>
-
-    <!-- Step 2: API Key -->
-    <div class="card form-card hidden" id="step2">
-      <h3 style="margin-top:0;">🔑 第 2 步：获取并输入 API Key</h3>
-      
-      <div class="tip">
-        <strong>💡 还没有 API Key？</strong>
-        <p style="margin:0.5rem 0 0 0;">
-          <a href="./api-key-guide.html" target="_blank">点击查看详细图文教程</a>
-        </p>
-      </div>
-      
-      <div id="provider-info" class="tip" style="background:#eff6ff; border-left-color:#2563eb;">
-        <strong id="provider-name">阿里云百炼</strong>
-        <p style="margin:0.5rem 0 0 0;">推荐模型：<strong id="provider-model">qwen-max</strong> 或 <strong id="provider-model-alt">qwen-plus</strong></p>
-        <p style="margin:0.5rem 0 0 0;">API 平台：<a id="provider-link" href="https://bailian.console.aliyun.com/" target="_blank">访问控制台</a></p>
-      </div>
-      
-      <label>API Key（必填）
-        <input id="api-key" required placeholder="sk-开头的一串字符" />
-      </label>
-      
-      <label>API Base URL（一般不需要改）
-        <input id="api-base-url" placeholder="https://..." />
-      </label>
-      
-      <label>模型名称（可选，留空用默认）
-        <input id="model-name" placeholder="比如：qwen-max" />
-      </label>
-      
-      <div class="success-box">
-        <strong>✅ 安全提示：</strong>你的 API Key 只会用于生成本地部署命令，不会上传到任何服务器。
-      </div>
-      
-      <div style="margin-top:1.5rem; display:flex; gap:1rem;">
-        <button class="btn" onclick="goToStep1()">上一步</button>
-        <button class="btn primary" onclick="goToStep3()">下一步：生成部署命令</button>
-      </div>
-    </div>
-
-    <!-- Step 3: 部署 -->
-    <div class="card form-card hidden" id="step3">
-      <h3 style="margin-top:0;">🚀 第 3 步：执行部署命令</h3>
-      
-      <p>复制下面的命令，在你的电脑终端中执行：</p>
-      
-      <div class="result-card">
-        <h3>📋 一键部署命令</h3>
-        <div class="cmd" id="deploy-cmd">点击"生成部署命令"后会显示在这里...</div>
-        <button class="btn success" onclick="copyCommand()">📋 复制命令</button>
-      </div>
-      
-      <div class="tip">
-        <strong>📌 如何执行？</strong>
-        <ol style="margin:0.5rem 0 0 0; padding-left:1.5rem;">
-          <li><strong>macOS：</strong>打开"终端"应用</li>
-          <li><strong>Windows：</strong>打开"WSL"或"Ubuntu"应用</li>
-          <li><strong>Linux：</strong>打开终端</li>
-          <li>粘贴命令，按回车</li>
-          <li>等待自动完成（约 2-5 分钟）</li>
-        </ol>
-      </div>
-      
-      <div class="success-box">
-        <strong>✅ 部署完成后：</strong>
-        <ul style="margin:0.5rem 0 0 0; padding-left:1.5rem;">
-          <li>龙虾 AI 会在你的电脑上运行</li>
-          <li>浏览器访问 <code>http://localhost:18789</code> 使用</li>
-          <li>如配置了社交软件集成，可在对应软件中对话</li>
+      <div class="features">
+        <strong>新版改进：</strong>
+        <ul style="list-style:none; padding:0; margin:0.5rem 0 0 0;">
+          <li>PowerShell 一键部署（Windows）</li>
+          <li>自动环境检测</li>
+          <li>更简单的操作</li>
+          <li>更好的错误提示</li>
         </ul>
       </div>
       
-      <div style="margin-top:1.5rem; display:flex; gap:1rem;">
-        <button class="btn" onclick="goToStep2()">上一步</button>
-        <a class="btn" href="./deploy.html">遇到问题？申请远程协助</a>
-      </div>
+      <a class="btn" href="./deploy.html">前往新版部署页面 →</a>
+      <p style="color:#6b7280; font-size:0.9rem; margin-top:1rem;">此页面将在 3 秒后自动跳转...</p>
     </div>
-  </main>
+  </div>
 
-<script>
-const providerConfig = {
-  'aliyun': {
-    name: '阿里云百炼（通义千问）',
-    models: ['qwen-max', 'qwen-plus'],
-    baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-    link: 'https://bailian.console.aliyun.com/'
-  },
-  'minimax': {
-    name: 'MiniMax（海螺 AI）',
-    models: ['abab6.5', 'abab6.5s'],
-    baseUrl: 'https://api.minimax.chat/v1',
-    link: 'https://platform.minimaxi.com/'
-  },
-  'deepseek': {
-    name: 'DeepSeek（深度求索）',
-    models: ['deepseek-chat', 'deepseek-coder'],
-    baseUrl: 'https://api.deepseek.com',
-    link: 'https://platform.deepseek.com/'
-  },
-  'zhipu': {
-    name: '智谱 AI',
-    models: ['glm-4-plus', 'glm-4'],
-    baseUrl: 'https://open.bigmodel.cn/api/paas/v4',
-    link: 'https://open.bigmodel.cn/'
-  },
-  'volcengine': {
-    name: '火山方舟（字节）',
-    models: ['Doubao-pro-4k', 'Doubao-lite-4k'],
-    baseUrl: 'https://ark.cn-beijing.volces.com/api/v3',
-    link: 'https://console.volcengine.com/ark/'
-  }
-};
-
-// 监听系统选择
-document.getElementById('os').addEventListener('change', function() {
-  const wslTip = document.getElementById('wsl-tip');
-  if (this.value === 'windows-wsl') {
-    wslTip.classList.remove('hidden');
-  } else {
-    wslTip.classList.add('hidden');
-  }
-});
-
-// 监听模型选择
-document.getElementById('model-provider').addEventListener('change', function() {
-  const tip = document.getElementById('model-tip');
-  const info = document.getElementById('provider-info');
-  if (this.value) {
-    tip.classList.remove('hidden');
-    const cfg = providerConfig[this.value];
-    document.getElementById('provider-name').textContent = cfg.name;
-    document.getElementById('provider-model').textContent = cfg.models[0];
-    document.getElementById('provider-model-alt').textContent = cfg.models[1];
-    document.getElementById('provider-link').href = cfg.link;
-    document.getElementById('api-base-url').value = cfg.baseUrl;
-    document.getElementById('model-name').placeholder = `比如：${cfg.models[0]}`;
-  } else {
-    tip.classList.add('hidden');
-  }
-});
-
-// 社交选项点击效果
-document.querySelectorAll('.social-option').forEach(opt => {
-  opt.addEventListener('click', function() {
-    this.classList.toggle('selected');
-  });
-});
-
-function goToStep2() {
-  // 验证 step1
-  const name = document.getElementById('name').value.trim();
-  const os = document.getElementById('os').value;
-  const goal = document.getElementById('goal').value.trim();
-  const provider = document.getElementById('model-provider').value;
-  
-  if (!name || !os || !goal || !provider) {
-    alert('请填写所有必填项');
-    return;
-  }
-  
-  document.getElementById('step1').classList.add('hidden');
-  document.getElementById('step2').classList.remove('hidden');
-  document.getElementById('step1-indicator').classList.remove('active');
-  document.getElementById('step1-indicator').classList.add('done');
-  document.getElementById('step2-indicator').classList.add('active');
-}
-
-function goToStep1() {
-  document.getElementById('step2').classList.add('hidden');
-  document.getElementById('step1').classList.remove('hidden');
-  document.getElementById('step1-indicator').classList.add('active');
-  document.getElementById('step1-indicator').classList.remove('done');
-  document.getElementById('step2-indicator').classList.remove('active');
-}
-
-function goToStep3() {
-  // 验证 step2
-  const apiKey = document.getElementById('api-key').value.trim();
-  if (!apiKey) {
-    alert('请填写 API Key');
-    return;
-  }
-  
-  // 生成部署命令
-  generateCommand();
-  
-  document.getElementById('step2').classList.add('hidden');
-  document.getElementById('step3').classList.remove('hidden');
-  document.getElementById('step2-indicator').classList.remove('active');
-  document.getElementById('step2-indicator').classList.add('done');
-  document.getElementById('step3-indicator').classList.add('active');
-}
-
-function generateCommand() {
-  const os = document.getElementById('os').value;
-  const provider = document.getElementById('model-provider').value;
-  const apiKey = document.getElementById('api-key').value.trim();
-  const baseUrl = document.getElementById('api-base-url').value.trim();
-  const modelName = document.getElementById('model-name').value.trim();
-  
-  const social = [];
-  document.querySelectorAll('input[name="social"]:checked').forEach(cb => {
-    social.push(cb.value);
-  });
-  
-  const cfg = providerConfig[provider];
-  const model = modelName || cfg.models[0];
-  
-  // 生成部署脚本 URL
-  // 注意：实际使用时需要替换为你的脚本托管地址
-  // 可以是 GitHub Raw、Gitee Raw、或你自己的服务器
-  const scriptUrl = 'https://raw.githubusercontent.com/openclaw/openclaw/main/site/scripts/install-lobster-cn.sh';
-  
-  // 生成命令
-  let cmd = `curl -fsSL ${scriptUrl} | bash -s -- \\
-  --api-key "${apiKey}" \\
-  --base-url "${baseUrl}" \\
-  --model "${model}"`;
-
-  if (social.length > 0) {
-    cmd += ` \\
-  --social "${social.join(',')}"`;
-  }
-  
-  if (os === 'windows-wsl') {
-    cmd = `# Windows 用户：请先确保 WSL 已安装\n# 如未安装，先运行：wsl --install\n\n` + cmd;
-  }
-  
-  document.getElementById('deploy-cmd').textContent = cmd;
-}
-
-function copyCommand() {
-  const cmd = document.getElementById('deploy-cmd').textContent;
-  navigator.clipboard.writeText(cmd).then(() => {
-    alert('命令已复制！现在打开终端粘贴执行即可。');
-  }).catch(() => {
-    // Fallback
-    const el = document.getElementById('deploy-cmd');
-    const range = document.createRange();
-    range.selectNode(el);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-    document.execCommand('copy');
-    alert('命令已复制！现在打开终端粘贴执行即可。');
-  });
-}
-</script>
+  <script>
+    setTimeout(function() {
+      window.location.href = './deploy.html';
+    }, 3000);
+  </script>
 </body>
 </html>

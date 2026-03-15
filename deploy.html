@@ -165,8 +165,15 @@
       <div class="check-list">
         <strong>下一步：</strong>
         <ol style="padding-left:1.5rem; line-height:2.2; margin-top:0.5rem;">
-          <li>找到下载的文件 <code>lobster-launcher.<span id="file-ext">bat</span></code></li>
-          <li>双击运行</li>
+          <li>找到下载的文件 <code>lobster-launcher.<span id="file-ext">ps1</span></code></li>
+          <li>
+            <strong>右键运行：</strong>
+            <ul style="margin-top:0.25rem;">
+              <li><strong>Windows：</strong>右键 → 使用 PowerShell 运行</li>
+              <li><strong>macOS：</strong>双击运行（首次需右键打开）</li>
+              <li><strong>Linux：</strong>双击运行</li>
+            </ul>
+          </li>
           <li>等待部署完成（2-5 分钟）</li>
           <li>浏览器访问 <code>http://localhost:18789</code></li>
         </ol>
@@ -175,6 +182,7 @@
       <div class="tip" style="margin-top:1.5rem; background:#eff6ff; border-left-color:#2563eb; color:#1e40af;">
         <strong>📌 提示：</strong>
         <ul style="margin:0.5rem 0 0 0; padding-left:1.5rem;">
+          <li><strong>PowerShell 更简单：</strong>自动检测环境，无需手动配置</li>
           <li><strong>macOS：</strong>首次运行需右键 → 打开 → 仍要打开</li>
           <li><strong>Windows：</strong>如提示 WSL 未安装，按提示安装后重启</li>
           <li>部署时请保持网络连接</li>
@@ -213,28 +221,29 @@ const osGuides = {
   'windows': {
     title: '🪟 Windows 用户指南',
     content: `
-      <li>启动器会自动检查并安装 WSL（Windows 子系统）</li>
+      <li>右键点击启动器 → <strong>使用 PowerShell 运行</strong></li>
+      <li>启动器会自动检查并安装 WSL（如需要）</li>
       <li>如未安装 WSL，按提示安装后<strong>重启电脑</strong></li>
-      <li>重启后重新运行启动器即可</li>
       <li>系统要求：Windows 10 版本 2004 或更高</li>
+      <li style="color:#2563eb;"><strong>PowerShell 更简单，不需要手动配置</strong></li>
     `
   },
   'macos': {
     title: '🍎 macOS 用户指南',
     content: `
+      <li>双击运行启动器（.command 文件）</li>
       <li>首次运行需<strong>右键点击</strong> → 打开 → 仍要打开</li>
       <li>这是 macOS 安全机制，仅需第一次操作</li>
       <li>支持所有 Intel 和 Apple Silicon (M1/M2/M3) 芯片</li>
-      <li>系统要求：macOS 10.15 或更高</li>
     `
   },
   'linux': {
     title: '🐧 Linux 用户指南',
     content: `
       <li>支持 Ubuntu、Debian、Fedora 等主流发行版</li>
-      <li>需要已安装 Git、Node.js、pnpm（启动器会尝试自动安装）</li>
+      <li>双击运行启动器（.sh 文件）</li>
+      <li>启动器会尝试自动安装依赖</li>
       <li>建议在有 sudo 权限的账户下运行</li>
-      <li>如遇问题，查看终端错误信息</li>
     `
   }
 };
@@ -295,9 +304,9 @@ function downloadLauncher() {
   let content, filename, mime;
   
   if (os === 'windows') {
-    filename = 'lobster-launcher.bat';
-    mime = 'application/x-bat';
-    content = generateBatLauncher(config);
+    filename = 'lobster-launcher.ps1';
+    mime = 'application/x-powershell';
+    content = generatePowerShellLauncher(config);
   } else if (os === 'macos') {
     filename = 'lobster-launcher.command';
     mime = 'application/x-shellscript';
@@ -323,12 +332,142 @@ function downloadLauncher() {
   document.getElementById('success-card').scrollIntoView({ behavior: 'smooth' });
 }
 
-function escapeBat(str) {
-  return str.replace(/'/g, "'\"'\"'").replace(/"/g, '""');
-}
-
 function escapeSh(str) {
   return str.replace(/'/g, "'\"'\"'");
+}
+
+function escapePs1(str) {
+  // PowerShell 字符串转义
+  return str.replace(/'/g, "''").replace(/"/g, '`"');
+}
+
+function generatePowerShellLauncher(config) {
+  const apiKeyEscaped = escapePs1(config.api_key);
+  const baseUrlEscaped = escapePs1(config.base_url);
+  const modelEscaped = escapePs1(config.model);
+  
+  return `# 🦞 龙虾 AI 一键部署工具 (PowerShell)
+# 使用方法：右键 → 使用 PowerShell 运行
+
+Write-Host ""
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "  龙虾 AI 一键部署工具" -ForegroundColor Cyan
+Write-Host "  套餐：标准版 (¥99)" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""
+
+# 设置编码
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+# 检查配置文件
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$configPath = Join-Path $scriptDir "config.json"
+
+if (-not (Test-Path $configPath)) {
+    Write-Host "[错误] 未找到配置文件 config.json" -ForegroundColor Red
+    Write-Host "请确保此文件与部署工具在同一目录" -ForegroundColor Yellow
+    Write-Host ""
+    Read-Host "按回车键退出"
+    exit 1
+}
+
+Write-Host "[✓] 配置文件找到" -ForegroundColor Green
+Write-Host ""
+
+# 读取配置
+try {
+    $config = Get-Content $configPath -Raw | ConvertFrom-Json
+    $apiKey = $config.api_key
+    $baseUrl = $config.base_url
+    $model = $config.model
+} catch {
+    Write-Host "[错误] 配置文件格式错误" -ForegroundColor Red
+    Read-Host "按回车键退出"
+    exit 1
+}
+
+Write-Host "[✓] 配置读取成功" -ForegroundColor Green
+Write-Host "    API Key: $($apiKey.Substring(0,6))...$($apiKey.Substring($apiKey.Length-4))"
+Write-Host "    模型：$model"
+Write-Host ""
+
+# 检查网络
+Write-Host "正在检查网络连接..." -ForegroundColor Yellow
+try {
+    $testUrl = "https://raw.githubusercontent.com"
+    $request = [System.Net.WebRequest]::Create($testUrl)
+    $request.Timeout = 3000
+    $response = $request.GetResponse()
+    Write-Host "[✓] 网络连接正常" -ForegroundColor Green
+} catch {
+    Write-Host "[!] 网络可能不稳定" -ForegroundColor Yellow
+    Write-Host "    如果部署失败，请检查网络后重试"
+}
+Write-Host ""
+
+# 开始部署
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "  开始部署" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "这可能需要 2-5 分钟，请稍候..." -ForegroundColor Yellow
+Write-Host ""
+
+# 检查是否需要安装 WSL
+Write-Host "[1/4] 检查 WSL..." -ForegroundColor Cyan
+$wslStatus = wsl --list 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "[!] 未检测到 WSL，正在安装..." -ForegroundColor Yellow
+    Write-Host ""
+    wsl --install
+    Write-Host ""
+    Write-Host "[!] WSL 安装完成后需要重启电脑" -ForegroundColor Red
+    Write-Host "[!] 重启后请重新运行此部署工具" -ForegroundColor Yellow
+    Write-Host ""
+    Read-Host "按回车键退出"
+    exit 1
+}
+Write-Host "[OK] WSL 已安装" -ForegroundColor Green
+Write-Host ""
+
+# 执行部署脚本
+Write-Host "[2/4] 开始部署..." -ForegroundColor Cyan
+Write-Host ""
+
+$installScript = @"
+curl -fsSL 'https://raw.githubusercontent.com/openclaw/openclaw/main/site/scripts/install-lobster-cn.sh' | bash -s -- --api-key '${apiKeyEscaped}' --base-url '${baseUrlEscaped}' --model '${modelEscaped}'
+"@
+
+try {
+    $result = wsl bash -c $installScript 2>&1
+    
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host ""
+        Write-Host "========================================" -ForegroundColor Green
+        Write-Host "  部署完成！" -ForegroundColor Green
+        Write-Host "========================================" -ForegroundColor Green
+        Write-Host ""
+        Write-Host "访问地址：http://localhost:18789" -ForegroundColor Cyan
+        Write-Host ""
+        Write-Host "📁 安装目录：~/lobster-ai" -ForegroundColor White
+        Write-Host "📄 配置文件：~/lobster-ai/.env" -ForegroundColor White
+        Write-Host ""
+    } else {
+        Write-Host ""
+        Write-Host "[错误] 部署失败" -ForegroundColor Red
+        Write-Host "错误信息：$result" -ForegroundColor Yellow
+        Write-Host ""
+        Write-Host "请检查网络或联系支持" -ForegroundColor Yellow
+    }
+} catch {
+    Write-Host ""
+    Write-Host "[错误] 部署失败" -ForegroundColor Red
+    Write-Host $_.Exception.Message -ForegroundColor Yellow
+}
+
+Write-Host ""
+Read-Host "按回车键退出"
+`;
 }
 
 function generateBatLauncher(config) {
