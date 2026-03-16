@@ -60,12 +60,31 @@ echo ""
 # 检查系统
 log_info "检查系统环境..."
 OS_TYPE=$(uname -s)
+OS_VERSION=""
+
 case $OS_TYPE in
   Linux*)
     log_info "检测到 Linux 系统"
+    # 检测 Linux 发行版
+    if [[ -f /etc/os-release ]]; then
+      source /etc/os-release
+      OS_VERSION="$NAME $VERSION_ID"
+      log_info "发行版：$OS_VERSION"
+    fi
     ;;
   Darwin*)
     log_info "检测到 macOS 系统"
+    OS_VERSION=$(sw_vers -productVersion)
+    log_info "版本：macOS $OS_VERSION"
+    
+    # 检查 macOS 版本 >= 10.15
+    local major_ver=$(echo $OS_VERSION | cut -d'.' -f1)
+    local minor_ver=$(echo $OS_VERSION | cut -d'.' -f2)
+    if [[ $major_ver -lt 10 ]] || [[ $major_ver -eq 10 && $minor_ver -lt 15 ]]; then
+      log_error "macOS 版本过低（需要 10.15 或更高），当前：$OS_VERSION"
+      log_error "请升级 macOS 后重试"
+      exit 1
+    fi
     ;;
   *)
     log_error "不支持的系统：$OS_TYPE"
@@ -82,11 +101,11 @@ check_git() {
     case $OS_TYPE in
       Linux*)
         if command -v apt >/dev/null 2>&1; then
-          sudo apt update && sudo apt install -y git
+          sudo apt update && sudo apt install -y git || { log_error "Git 安装失败"; exit 1; }
         elif command -v yum >/dev/null 2>&1; then
-          sudo yum install -y git
+          sudo yum install -y git || { log_error "Git 安装失败"; exit 1; }
         elif command -v pacman >/dev/null 2>&1; then
-          sudo pacman -S --noconfirm git
+          sudo pacman -S --noconfirm git || { log_error "Git 安装失败"; exit 1; }
         else
           log_error "无法自动安装 Git，请手动安装后重试"
           exit 1
@@ -94,8 +113,18 @@ check_git() {
         log_success "Git 安装完成"
         ;;
       Darwin*)
-        log_error "请先安装 Xcode Command Line Tools: xcode-select --install"
-        exit 1
+        log_info "尝试安装 Xcode Command Line Tools..."
+        xcode-select --install 2>/dev/null || {
+          log_warn "Xcode CLI 可能已安装或需要手动安装"
+          log_warn "请访问 App Store 安装 Xcode 后重试"
+        }
+        # 等待用户安装
+        sleep 5
+        if ! command -v git >/dev/null 2>&1; then
+          log_error "Git 安装未完成，请运行 xcode-select --install 后重试"
+          exit 1
+        fi
+        log_success "Git 安装完成"
         ;;
     esac
   fi
