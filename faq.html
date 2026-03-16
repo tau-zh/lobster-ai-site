@@ -3,24 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FAQ｜龙虾AI打工人</title>
+  <title>FAQ｜龙虾 AI 打工人</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .simple-header { padding: 2rem 0; }
+    .simple-header h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #111827; }
+    .simple-header p { color: #374151; font-size: 1.1rem; }
+    .simple-header a { color: #2563eb; font-weight: 500; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1rem; }
+    .card { background: white; border: 1px solid #d1d5db; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .card h3 { color: #111827; font-size: 1.25rem; margin-bottom: 1rem; }
+    .card p { color: #374151; line-height: 1.6; }
+    code { background: #f3f4f6; padding: 0.2rem 0.5rem; border-radius: 4px; font-family: monospace; font-size: 0.85em; color: #1f2937; border: 1px solid #e5e7eb; }
+  </style>
 </head>
 <body>
   <div class="simple-header container">
     <a href="./index.html">← 返回首页</a>
     <h1>常见问题</h1>
-    <p>关于 OpenClaw / 龙虾一键部署、代部署与国产模型接入。</p>
+    <p>关于龙虾 AI 一键部署、模型接入与使用。</p>
   </div>
-  <main class="container faq-list">
-    <div class="card"><h3>这和教程有什么区别？</h3><p>教程教你自己研究，我卖的是结果：帮你把 OpenClaw / 龙虾 AI 助手部署、配置、调通，减少踩坑时间。</p></div>
-    <div class="card"><h3>必须自己有服务器吗？</h3><p>当前主打模式是用户自备服务器。你提供机器，我完成部署。如果你还没有服务器，也可以先来咨询。</p></div>
-    <div class="card"><h3>支持哪些模型？</h3><p>优先支持阿里云百炼、DeepSeek、火山方舟、智谱、MiniMax。</p></div>
-    <div class="card"><h3>有没有真正一键部署？</h3><p>当前版本已经提供“部署向导 + 命令生成 + 人工兜底”。如果你会一点命令，可以先照着走；如果不想折腾，直接提单代部署。</p></div>
-    <div class="card"><h3>为什么页面里要写龙虾和 OpenClaw？</h3><p>因为这两个词现在都有搜索和传播价值。对外讲“AI打工人”更容易懂，对内核讲 OpenClaw / 龙虾更方便承接目标用户。</p></div>
+  <main class="container">
+    <div class="card">
+      <h3>这是什么？</h3>
+      <p>龙虾 AI 是一个帮你把 OpenClaw（开源 AI 助手框架）部署到本地电脑的服务。部署完成后，你可以通过微信、QQ、飞书等社交软件与 AI 对话，让它帮你处理各种任务。</p>
+    </div>
+    
+    <div class="card">
+      <h3>和教程有什么区别？</h3>
+      <p>教程需要你自己研究每一步，可能会遇到各种环境问题。我们提供一键部署脚本：填写配置 → 完成支付 → 下载脚本 → 双击运行，自动完成所有配置，减少踩坑时间。</p>
+    </div>
+    
+    <div class="card">
+      <h3>需要自己准备服务器吗？</h3>
+      <p>不需要。龙虾 AI 部署在你自己的电脑上（Windows/macOS/Linux），不需要额外购买服务器。电脑开机就能用，关机就停止。</p>
+    </div>
+    
+    <div class="card">
+      <h3>支持哪些大模型？</h3>
+      <p>支持主流国产大模型平台：</p>
+      <ul style="margin-top:0.5rem; padding-left:1.5rem; color:#374151;">
+        <li>阿里云百炼（通义千问）- 推荐</li>
+        <li>MiniMax（海螺 AI）</li>
+        <li>DeepSeek（深度求索）</li>
+        <li>智谱 AI</li>
+        <li>火山方舟（字节）</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <h3>社交软件支持哪些？</h3>
+      <p>目前支持：</p>
+      <ul style="margin-top:0.5rem; padding-left:1.5rem; color:#374151;">
+        <li>飞书（推荐，接入最简单）</li>
+        <li>QQ</li>
+        <li>微信（个人号）</li>
+      </ul>
+      <p style="margin-top:0.5rem;">部署时可以选一个或多个，后续也可以随时添加。</p>
+    </div>
+    
+    <div class="card">
+      <h3>99 元包含什么？</h3>
+      <p>¥99 是一次性部署工具费用，包含：</p>
+      <ul style="margin-top:0.5rem; padding-left:1.5rem; color:#374151;">
+        <li>专属一键部署脚本（根据你的配置生成）</li>
+        <li>自动安装所有依赖</li>
+        <li>配置大模型 API</li>
+        <li>配置社交软件机器人</li>
+        <li>部署后 3 天技术支持</li>
+      </ul>
+      <p style="margin-top:0.5rem;">不包含大模型 API 使用费（直接交给阿里云等平台，约 ¥10-50/月）。</p>
+    </div>
+    
+    <div class="card">
+      <h3>API 费用贵吗？</h3>
+      <p>不贵。国产大模型价格已经很亲民：</p>
+      <ul style="margin-top:0.5rem; padding-left:1.5rem; color:#374151;">
+        <li>阿里云百炼 qwen-plus：约 ¥0.01-0.02 / 千 tokens</li>
+        <li>MiniMax abab6.5s：约 ¥0.01-0.03 / 千 tokens</li>
+        <li>DeepSeek：约 ¥0.01-0.02 / 千 tokens</li>
+      </ul>
+      <p style="margin-top:0.5rem;">日常使用（聊天、写东西、查资料）每月约 ¥10-50。</p>
+    </div>
+    
+    <div class="card">
+      <h3>部署后怎么用？</h3>
+      <p>部署完成后有两种使用方式：</p>
+      <ul style="margin-top:0.5rem; padding-left:1.5rem; color:#374151;">
+        <li><strong>Web 界面：</strong>浏览器访问 <code>http://localhost:18789</code></li>
+        <li><strong>社交软件：</strong>如果配置了微信/QQ/飞书，直接在对应的社交软件中与 AI 对话</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <h3>部署失败怎么办？</h3>
+      <p>部署脚本会自动检测环境问题并给出提示。如遇问题：</p>
+      <ul style="margin-top:0.5rem; padding-left:1.5rem; color:#374151;">
+        <li>检查网络连接（需要访问 GitHub 和模型平台）</li>
+        <li>查看脚本输出的错误信息</li>
+        <li>联系智能咨询助手获取帮助</li>
+      </ul>
+    </div>
+    
+    <div class="card">
+      <h3>为什么叫"龙虾"和"OpenClaw"？</h3>
+      <p>OpenClaw 是开源项目的名字（Claw = 爪子）。"龙虾"是中文昵称，更容易记住和传播。对外讲"AI 打工人"更容易理解，对内用 OpenClaw/龙虾更方便。</p>
+    </div>
   </main>
 </body>
 </html>

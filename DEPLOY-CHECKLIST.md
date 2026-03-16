@@ -75,7 +75,7 @@ git push -u origin main
 - [ ] 测试 API Key 教程
 - [ ] 测试下载启动器
 
-### 5. 绑定域名（等 aiworker.help 实名认证完成）
+### 5. 绑定域名（aiworker.help 已完成实名认证）
 1. Vercel → Settings → Domains
 2. 添加 `aiworker.help`
 3. 配置 DNS：
@@ -121,3 +121,4 @@ vercel --prod
 - 域名：aiworker.help（实名认证中）
 - GitHub: github.com/YOUR_USERNAME/lobster-site
 - Vercel: lobster-site.vercel.app（待部署）
+署）

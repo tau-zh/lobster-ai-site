@@ -45,6 +45,9 @@
     code { background: #f3f4f6; padding: 0.2rem 0.5rem; border-radius: 4px; font-family: monospace; font-size: 0.85em; color: #1f2937; border: 1px solid #e5e7eb; }
     .bot-notice { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 1.5rem; margin: 2rem auto; text-align: center; }
     .bot-notice h3 { color: #1e40af; margin-bottom: 0.5rem; }
+    .flow-diagram { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 2rem; margin: 2rem auto; text-align: center; }
+    .flow-step { display: inline-block; padding: 1rem 1.5rem; background: white; border: 2px solid #2563eb; border-radius: 8px; margin: 0.5rem; font-weight: 600; color: #1e40af; }
+    .flow-arrow { color: #6b7280; font-size: 1.5rem; }
   </style>
 </head>
 <body>
@@ -55,6 +58,21 @@
   </div>
 
   <main class="container">
+    <!-- 部署流程 -->
+    <div class="flow-diagram">
+      <h3 style="color:#1e40af; margin-bottom:1rem;">📋 部署流程</h3>
+      <div>
+        <span class="flow-step">1. 填写配置</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">2. 完成支付</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">3. 下载脚本</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">4. 双击运行</span>
+      </div>
+      <p class="muted" style="margin-top:1rem;">全程 2-5 分钟，无需技术背景</p>
+    </div>
+
     <!-- 智能咨询机器人提示 -->
     <div class="bot-notice">
       <h3>🤖 智能咨询助手</h3>
@@ -83,26 +101,27 @@
       <div class="card price-card featured">
         <div class="mini-badge">🔥 推荐</div>
         <h3>一键部署套餐</h3>
-        <div class="price">¥99</div>
+        <div class="price">¥99<span> / 一次性</span></div>
         <ul class="feature-list">
-          <li>一键部署启动器</li>
+          <li>专属部署脚本</li>
           <li>自动安装所有依赖</li>
           <li>支持 Windows/macOS/Linux</li>
           <li>接入 1 个大模型平台</li>
-          <li>配置社交软件集成</li>
+          <li>配置社交软件机器人</li>
           <li>部署后 3 天技术支持</li>
         </ul>
-        <a class="btn primary" href="./deploy.html">立即下载</a>
-        <p class="muted small" style="margin-top:1rem;">⚡ 下载启动器，双击完成部署</p>
+        <a class="btn primary" href="./deploy.html">立即部署</a>
+        <p class="muted small" style="margin-top:1rem;">⚡ 填写配置 → 支付 → 下载脚本 → 双击完成</p>
       </div>
     </div>
 
     <div class="tip">
       <strong>💡 套餐说明：</strong>
       <ul style="margin:0.5rem 0 0 0; padding-left:1.5rem;">
-        <li><strong>免费版：</strong>智能咨询机器人自动回复所有问题，包括产品咨询、部署指导、API 获取教程等</li>
-        <li><strong>¥99 套餐：</strong>下载一键部署启动器，双击即可完成全部部署，无需手动操作</li>
+        <li><strong>免费版：</strong>智能咨询机器人自动回复所有问题，包括产品咨询、部署流程、API 获取教程等</li>
+        <li><strong>¥99 套餐：</strong>获得专属一键部署脚本，填写你的配置后下载，双击即可完成全部部署，无需手动操作</li>
         <li><strong>API 费用：</strong>大模型 API 使用费由平台收取（约 ¥10-50/月），与本服务无关</li>
+        <li><strong>一次性费用：</strong>¥99 是一次性部署工具费用，部署完成后龙虾 AI 就在你的电脑上运行了</li>
       </ul>
     </div>
   </main>
@@ -116,7 +135,7 @@
         <div class="faq-item">
           <h4>Q: 免费版和付费版有什么区别？</h4>
           <p><strong>免费版：</strong>智能咨询机器人自动回复，解答产品咨询、部署流程、API 获取等问题。</p>
-          <p style="margin-top:0.5rem;"><strong>¥99 套餐：</strong>获得一键部署启动器，下载后双击即可完成全部部署，无需手动操作命令行。</p>
+          <p style="margin-top:0.5rem;"><strong>¥99 套餐：</strong>获得专属一键部署脚本，填写你的配置（电脑系统、API Key、社交软件等）后下载，双击即可完成全部部署。</p>
         </div>
 
         <div class="faq-item">
@@ -148,17 +167,32 @@
         </div>
 
         <div class="faq-item">
-          <h4>Q: 部署后不会用怎么办？</h4>
-          <p>部署完成后，浏览器访问 <code>http://localhost:18789</code> 即可使用。如有问题，可继续咨询智能助手，或查看网站上的教程文档。</p>
+          <h4>Q: 部署后怎么用？</h4>
+          <p>部署完成后：</p>
+          <ul style="margin-top:0.5rem; padding-left:1.5rem;">
+            <li>浏览器访问 <code>http://localhost:18789</code> 使用 Web 界面</li>
+            <li>如果配置了社交软件（微信/QQ/飞书），可以直接在社交软件中与 AI 对话</li>
+          </ul>
         </div>
 
         <div class="faq-item">
           <h4>Q: 支持哪些系统？</h4>
-          <p>一键部署启动器支持：</p>
+          <p>一键部署脚本支持：</p>
           <ul style="margin-top:0.5rem; padding-left:1.5rem;">
             <li><strong>Windows：</strong>Win10/11（自动安装 WSL）</li>
             <li><strong>macOS：</strong>10.15 或更高（支持 M1/M2/M3）</li>
             <li><strong>Linux：</strong>Ubuntu/Debian/Fedora 等主流发行版</li>
+          </ul>
+        </div>
+
+        <div class="faq-item">
+          <h4>Q: 部署失败怎么办？</h4>
+          <p>部署脚本会自动检测环境问题并给出提示。如遇问题：</p>
+          <ul style="margin-top:0.5rem; padding-left:1.5rem;">
+            <li>检查网络连接</li>
+            <li>查看脚本输出的错误信息</li>
+            <li>访问 <a href="./faq.html" style="color:#2563eb;">FAQ</a> 获取帮助</li>
+            <li>联系智能咨询助手或人工支持</li>
           </ul>
         </div>
 

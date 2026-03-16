@@ -52,9 +52,20 @@
     .os-guide h4 { color: #111827; margin-bottom: 0.5rem; font-size: 1rem; }
     .os-guide ul { margin: 0.5rem 0; padding-left: 1.5rem; color: #374151; }
     .os-guide li { margin: 0.25rem 0; }
+    .payment-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #2563eb; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; text-align: center; }
+    .payment-box h3 { color: #1e40af; margin-bottom: 0.5rem; }
+    .payment-qr { max-width: 200px; margin: 1rem auto; background: white; padding: 1rem; border-radius: 8px; }
+    .progress-steps { display: flex; justify-content: space-between; margin: 2rem 0; }
+    .progress-step { flex: 1; text-align: center; padding: 1rem; position: relative; }
+    .progress-step.active { color: #2563eb; font-weight: 600; }
+    .progress-step.completed { color: #10b981; }
+    .progress-step:after { content: ""; position: absolute; top: 50%; right: 0; width: 50%; height: 2px; background: #e5e7eb; }
+    .progress-step:last-child:after { display: none; }
     @media (max-width: 640px) {
       .social-options { grid-template-columns: 1fr; }
       .step-box { flex-direction: column; }
+      .progress-steps { flex-direction: column; gap: 0.5rem; }
+      .progress-step:after { display: none; }
     }
   </style>
 </head>
@@ -62,10 +73,18 @@
   <div class="simple-header container">
     <a href="./index.html">← 返回首页</a>
     <h1>🚀 一键部署</h1>
-    <p>填写配置 → 下载启动器 → 双击运行，3 步完成。</p>
+    <p>填写配置 → 完成支付 → 下载脚本 → 双击运行</p>
   </div>
 
   <main class="container form-wrap" style="margin-bottom:3rem;">
+    <!-- 进度提示 -->
+    <div class="progress-steps">
+      <div class="progress-step active" id="step1">1. 填写配置</div>
+      <div class="progress-step" id="step2">2. 完成支付</div>
+      <div class="progress-step" id="step3">3. 下载脚本</div>
+      <div class="progress-step" id="step4">4. 运行部署</div>
+    </div>
+
     <!-- 步骤说明 -->
     <div class="step-box">
       <div class="step-item">
@@ -74,16 +93,20 @@
       </div>
       <div class="step-item">
         <span class="step-num">2</span>
-        <div><strong>下载启动器</strong><br/><span class="small">仅几 KB</span></div>
+        <div><strong>完成支付</strong><br/><span class="small">¥99</span></div>
       </div>
       <div class="step-item">
         <span class="step-num">3</span>
+        <div><strong>下载脚本</strong><br/><span class="small">仅几 KB</span></div>
+      </div>
+      <div class="step-item">
+        <span class="step-num">4</span>
         <div><strong>双击运行</strong><br/><span class="small">自动部署</span></div>
       </div>
     </div>
 
     <!-- 配置表单 -->
-    <div class="card form-card">
+    <div class="card form-card" id="config-card">
       <h3 style="margin-top:0;">📝 填写部署配置</h3>
       
       <label>你的电脑系统
@@ -129,7 +152,7 @@
         <p style="margin:0.5rem 0 0 0;"><a href="./api-key-guide.html" target="_blank">5 分钟获取教程</a></p>
       </div>
       
-      <label>社交软件集成（可选）
+      <label>希望集成哪些社交软件？（可选，可多选）
         <div class="social-options">
           <label class="social-option">
             <input type="checkbox" name="social" value="feishu" />
@@ -147,27 +170,54 @@
             <span class="social-name">微信</span>
           </label>
         </div>
+        <p class="muted small" style="margin-top:0.5rem;">部署后可通过选择的社交软件与 AI 对话</p>
       </label>
       
       <div style="margin-top:1.5rem;">
-        <button class="btn success" onclick="downloadLauncher()" id="download-btn" style="font-size:1.2rem; width: 100%;">📥 下载启动器（¥99 套餐）</button>
+        <button class="btn primary" onclick="goToPayment()" id="payment-btn" style="font-size:1.2rem; width: 100%;">💳 下一步：完成支付（¥99）</button>
       </div>
       
       <p class="muted small" style="margin-top:1rem; text-align: center;">
-        ⚡ 文件仅几 KB，双击即可运行 | <a href="./pricing.html" style="color:#2563eb;">查看套餐说明</a>
+        ⚡ 支付成功后下载脚本，双击即可完成部署 | <a href="./pricing.html" style="color:#2563eb;">查看套餐说明</a>
       </p>
+    </div>
+
+    <!-- 支付提示 -->
+    <div class="card payment-box hidden" id="payment-card">
+      <h3>💳 完成支付</h3>
+      <p class="muted">套餐费用：¥99（一次性）</p>
+      
+      <div class="payment-qr">
+        <p style="color:#6b7280; font-size:0.9rem;">[支付二维码]</p>
+        <p style="color:#9ca3af; font-size:0.8rem;">请联系客服获取支付二维码</p>
+      </div>
+      
+      <div class="tip" style="background:white; border-left-color:#2563eb; color:#1e40af;">
+        <strong>📌 支付方式：</strong>
+        <ul style="margin:0.5rem 0 0 0; padding-left:1.5rem;">
+          <li>微信/支付宝扫码支付</li>
+          <li>支付后联系客服确认</li>
+          <li>确认后获取下载链接</li>
+        </ul>
+      </div>
+      
+      <div style="margin-top:1.5rem; display:grid; gap:1rem; grid-template-columns: 1fr 1fr;">
+        <button class="btn" onclick="backToConfig()">← 返回修改配置</button>
+        <button class="btn success" onclick="confirmPayment()">✅ 已完成支付</button>
+      </div>
     </div>
 
     <!-- 下载完成提示 -->
     <div class="card success hidden" id="success-card">
-      <h3 style="margin-top:0; color:#065f46;">✅ 下载完成！</h3>
+      <h3 style="margin-top:0; color:#065f46;">✅ 支付成功！可以下载了</h3>
       
       <div class="check-list">
         <strong>下一步：</strong>
         <ol style="padding-left:1.5rem; line-height:2.2; margin-top:0.5rem;">
+          <li>点击下方按钮下载部署脚本</li>
           <li>找到下载的文件 <code>lobster-launcher.<span id="file-ext">ps1</span></code></li>
           <li>
-            <strong>右键运行：</strong>
+            <strong>运行脚本：</strong>
             <ul style="margin-top:0.25rem;">
               <li><strong>Windows：</strong>右键 → 使用 PowerShell 运行</li>
               <li><strong>macOS：</strong>双击运行（首次需右键打开）</li>
@@ -179,10 +229,14 @@
         </ol>
       </div>
       
+      <div style="margin-top:1.5rem;">
+        <button class="btn success" onclick="downloadLauncher()" id="download-btn" style="font-size:1.1rem; width: 100%;">📥 下载部署脚本</button>
+      </div>
+      
       <div class="tip" style="margin-top:1.5rem; background:#eff6ff; border-left-color:#2563eb; color:#1e40af;">
         <strong>📌 提示：</strong>
         <ul style="margin:0.5rem 0 0 0; padding-left:1.5rem;">
-          <li><strong>PowerShell 更简单：</strong>自动检测环境，无需手动配置</li>
+          <li><strong>自动部署：</strong>脚本会自动检测环境并完成所有配置</li>
           <li><strong>macOS：</strong>首次运行需右键 → 打开 → 仍要打开</li>
           <li><strong>Windows：</strong>如提示 WSL 未安装，按提示安装后重启</li>
           <li>部署时请保持网络连接</li>
@@ -193,6 +247,10 @@
     <!-- 常见问题 -->
     <div class="card" style="margin-top:1.5rem;">
       <h3 style="margin-top:0;">❓ 常见问题</h3>
+      <div style="margin-top:1rem;">
+        <h4 style="color:#111827; margin-bottom:0.5rem;">Q: 支付后如何获取脚本？</h4>
+        <p class="muted">支付成功后点击"已完成支付"按钮，即可下载专属部署脚本。</p>
+      </div>
       <div style="margin-top:1rem;">
         <h4 style="color:#111827; margin-bottom:0.5rem;">Q: 下载的文件在哪里？</h4>
         <p class="muted">检查浏览器下载文件夹，或按 Ctrl+J（Windows）/ Cmd+Shift+J（macOS）查看。</p>
@@ -221,17 +279,17 @@ const osGuides = {
   'windows': {
     title: '🪟 Windows 用户指南',
     content: `
-      <li>右键点击启动器 → <strong>使用 PowerShell 运行</strong></li>
-      <li>启动器会自动检查并安装 WSL（如需要）</li>
+      <li>右键点击脚本 → <strong>使用 PowerShell 运行</strong></li>
+      <li>脚本会自动检查并安装 WSL（如需要）</li>
       <li>如未安装 WSL，按提示安装后<strong>重启电脑</strong></li>
       <li>系统要求：Windows 10 版本 2004 或更高</li>
-      <li style="color:#2563eb;"><strong>PowerShell 更简单，不需要手动配置</strong></li>
+      <li style="color:#2563eb;"><strong>全自动部署，不需要手动配置</strong></li>
     `
   },
   'macos': {
     title: '🍎 macOS 用户指南',
     content: `
-      <li>双击运行启动器（.command 文件）</li>
+      <li>双击运行脚本（.command 文件）</li>
       <li>首次运行需<strong>右键点击</strong> → 打开 → 仍要打开</li>
       <li>这是 macOS 安全机制，仅需第一次操作</li>
       <li>支持所有 Intel 和 Apple Silicon (M1/M2/M3) 芯片</li>
@@ -241,8 +299,8 @@ const osGuides = {
     title: '🐧 Linux 用户指南',
     content: `
       <li>支持 Ubuntu、Debian、Fedora 等主流发行版</li>
-      <li>双击运行启动器（.sh 文件）</li>
-      <li>启动器会尝试自动安装依赖</li>
+      <li>双击运行脚本（.sh 文件）</li>
+      <li>脚本会自动安装依赖</li>
       <li>建议在有 sudo 权限的账户下运行</li>
     `
   }
@@ -284,7 +342,7 @@ function getSelectedSocial() {
   return selected;
 }
 
-function downloadLauncher() {
+function goToPayment() {
   const os = document.getElementById('os').value;
   const provider = document.getElementById('model-provider').value;
   const apiKey = document.getElementById('api-key').value.trim();
@@ -294,27 +352,62 @@ function downloadLauncher() {
     return;
   }
   
+  document.getElementById('config-card').classList.add('hidden');
+  document.getElementById('payment-card').classList.remove('hidden');
+  
+  // Update progress
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step1').classList.add('completed');
+  document.getElementById('step2').classList.add('active');
+}
+
+function backToConfig() {
+  document.getElementById('config-card').classList.remove('hidden');
+  document.getElementById('payment-card').classList.add('hidden');
+  
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('step1').classList.remove('completed');
+  document.getElementById('step2').classList.remove('active');
+}
+
+function confirmPayment() {
+  document.getElementById('payment-card').classList.add('hidden');
+  document.getElementById('success-card').classList.remove('hidden');
+  
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('step2').classList.add('completed');
+  document.getElementById('step3').classList.add('active');
+  
+  // Update file extension based on OS
+  const os = document.getElementById('os').value;
+  let ext = 'ps1';
+  if (os === 'macos') ext = 'command';
+  else if (os === 'linux') ext = 'sh';
+  document.getElementById('file-ext').textContent = ext;
+}
+
+function downloadLauncher() {
+  const os = document.getElementById('os').value;
+  const provider = document.getElementById('model-provider').value;
+  const apiKey = document.getElementById('api-key').value.trim();
   const baseUrl = document.getElementById('api-base-url').value.trim() || providerConfig[provider].baseUrl;
   const model = document.getElementById('model-name').value.trim() || providerConfig[provider].models[0];
   const social = getSelectedSocial();
-  
-  const config = { api_key: apiKey, base_url: baseUrl, model, social: social.join(','), os };
-  const configB64 = btoa(JSON.stringify(config));
   
   let content, filename, mime;
   
   if (os === 'windows') {
     filename = 'lobster-launcher.ps1';
     mime = 'application/x-powershell';
-    content = generatePowerShellLauncher(config);
+    content = generatePowerShellLauncher({ api_key: apiKey, base_url: baseUrl, model, social: social.join(',') });
   } else if (os === 'macos') {
     filename = 'lobster-launcher.command';
     mime = 'application/x-shellscript';
-    content = generateCommandLauncher(config);
+    content = generateCommandLauncher({ api_key: apiKey, base_url: baseUrl, model, social: social.join(',') });
   } else {
     filename = 'lobster-launcher.sh';
     mime = 'application/x-shellscript';
-    content = generateShLauncher(config);
+    content = generateShLauncher({ api_key: apiKey, base_url: baseUrl, model, social: social.join(',') });
   }
   
   const blob = new Blob([content], { type: mime });
@@ -327,9 +420,10 @@ function downloadLauncher() {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
   
-  document.getElementById('file-ext').textContent = filename.split('.').pop();
-  document.getElementById('success-card').classList.remove('hidden');
-  document.getElementById('success-card').scrollIntoView({ behavior: 'smooth' });
+  // Update progress
+  document.getElementById('step3').classList.remove('active');
+  document.getElementById('step3').classList.add('completed');
+  document.getElementById('step4').classList.add('active');
 }
 
 function escapeSh(str) {
@@ -337,7 +431,6 @@ function escapeSh(str) {
 }
 
 function escapePs1(str) {
-  // PowerShell 字符串转义
   return str.replace(/'/g, "''").replace(/"/g, '`"');
 }
 
@@ -346,74 +439,18 @@ function generatePowerShellLauncher(config) {
   const baseUrlEscaped = escapePs1(config.base_url);
   const modelEscaped = escapePs1(config.model);
   
-  return `# 🦞 龙虾 AI 一键部署工具 (PowerShell)
+  return `# 🦞 龙虾 AI 一键部署工具
 # 使用方法：右键 → 使用 PowerShell 运行
 
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "  龙虾 AI 一键部署工具" -ForegroundColor Cyan
-Write-Host "  套餐：标准版 (¥99)" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host ""
 
 # 设置编码
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-# 检查配置文件
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$configPath = Join-Path $scriptDir "config.json"
-
-if (-not (Test-Path $configPath)) {
-    Write-Host "[错误] 未找到配置文件 config.json" -ForegroundColor Red
-    Write-Host "请确保此文件与部署工具在同一目录" -ForegroundColor Yellow
-    Write-Host ""
-    Read-Host "按回车键退出"
-    exit 1
-}
-
-Write-Host "[✓] 配置文件找到" -ForegroundColor Green
-Write-Host ""
-
-# 读取配置
-try {
-    $config = Get-Content $configPath -Raw | ConvertFrom-Json
-    $apiKey = $config.api_key
-    $baseUrl = $config.base_url
-    $model = $config.model
-} catch {
-    Write-Host "[错误] 配置文件格式错误" -ForegroundColor Red
-    Read-Host "按回车键退出"
-    exit 1
-}
-
-Write-Host "[✓] 配置读取成功" -ForegroundColor Green
-Write-Host "    API Key: $($apiKey.Substring(0,6))...$($apiKey.Substring($apiKey.Length-4))"
-Write-Host "    模型：$model"
-Write-Host ""
-
-# 检查网络
-Write-Host "正在检查网络连接..." -ForegroundColor Yellow
-try {
-    $testUrl = "https://raw.githubusercontent.com"
-    $request = [System.Net.WebRequest]::Create($testUrl)
-    $request.Timeout = 3000
-    $response = $request.GetResponse()
-    Write-Host "[✓] 网络连接正常" -ForegroundColor Green
-} catch {
-    Write-Host "[!] 网络可能不稳定" -ForegroundColor Yellow
-    Write-Host "    如果部署失败，请检查网络后重试"
-}
-Write-Host ""
-
-# 开始部署
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "  开始部署" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host ""
-Write-Host "这可能需要 2-5 分钟，请稍候..." -ForegroundColor Yellow
-Write-Host ""
-
-# 检查是否需要安装 WSL
 Write-Host "[1/4] 检查 WSL..." -ForegroundColor Cyan
 $wslStatus = wsl --list 2>$null
 if ($LASTEXITCODE -ne 0) {
@@ -430,8 +467,9 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "[OK] WSL 已安装" -ForegroundColor Green
 Write-Host ""
 
-# 执行部署脚本
 Write-Host "[2/4] 开始部署..." -ForegroundColor Cyan
+Write-Host ""
+Write-Host "这可能需要 2-5 分钟，请稍候..." -ForegroundColor Yellow
 Write-Host ""
 
 $installScript = @"
@@ -470,61 +508,6 @@ Read-Host "按回车键退出"
 `;
 }
 
-function generateBatLauncher(config) {
-  return `@echo off
-chcp 65001 >nul
-title 龙虾 AI 一键部署 (¥99 套餐)
-echo.
-echo ========================================
-echo   龙虾 AI 一键部署工具
-echo   套餐：标准版 (¥99)
-echo ========================================
-echo.
-echo [1/4] 检查 WSL...
-wsl --list >nul 2>&1
-if %errorlevel% neq 0 (
-    echo [!] 未检测到 WSL，正在安装...
-    wsl --install
-    echo.
-    echo [!] WSL 安装完成后请重启电脑
-    echo [!] 重启后重新运行此部署工具
-    echo.
-    pause
-    exit /b 1
-)
-echo [OK] WSL 已安装
-echo.
-echo [2/4] 检查网络...
-ping -n 1 -w 1000 raw.githubusercontent.com >nul 2>&1
-if %errorlevel% neq 0 (
-    echo [!] 网络可能不稳定，请确保可以访问 GitHub
-)
-echo.
-echo [3/4] 开始部署...
-echo 这可能需要 2-5 分钟，请稍候...
-echo.
-wsl bash -c "curl -fsSL 'https://raw.githubusercontent.com/openclaw/openclaw/main/site/scripts/install-lobster-cn.sh' | bash -s -- --api-key '${escapeBat(config.api_key)}' --base-url '${escapeBat(config.base_url)}' --model '${escapeBat(config.model)}'"
-if %errorlevel% neq 0 (
-    echo.
-    echo [错误] 部署失败
-    echo 请检查网络或联系支持
-    pause
-    exit /b 1
-)
-echo.
-echo ========================================
-echo   部署完成！
-echo ========================================
-echo.
-echo 访问地址：http://localhost:18789
-echo.
-echo 📁 安装目录：~/lobster-ai
-echo 📄 配置文件：~/lobster-ai/.env
-echo.
-pause
-`;
-}
-
 function generateCommandLauncher(config) {
   return `#!/usr/bin/env bash
 cd "$(dirname "$0")"
@@ -532,7 +515,6 @@ clear
 echo ""
 echo "========================================"
 echo "  龙虾 AI 一键部署工具"
-echo "  套餐：标准版 (¥99)"
 echo "========================================"
 echo ""
 echo "[1/3] 开始部署..."
