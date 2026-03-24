@@ -7,28 +7,49 @@
   <meta name="description" content="一步一步教你获取阿里百炼和 MiniMax 的 API Key，小白也能看懂的图文教程">
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .guide-section { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
-    .guide-section h1 { font-size: 2rem; margin-bottom: 1rem; color: #1a1a1a; }
-    .guide-section h2 { font-size: 1.5rem; margin: 2rem 0 1rem; color: #2563eb; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
-    .guide-section h3 { font-size: 1.2rem; margin: 1.5rem 0 0.8rem; color: #374151; }
-    .step { background: #f9fafb; border-left: 4px solid #2563eb; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-    .step-number { display: inline-block; background: #2563eb; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: bold; margin-right: 0.5rem; }
-    .tip { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-    .warning { background: #fee2e2; border-left: 4px solid #ef4444; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-    .success { background: #d1fae5; border-left: 4px solid #10b981; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
-    .platform-card { border: 2px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
-    .platform-card h3 { margin-top: 0; color: #1e40af; }
-    .price-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-    .price-table th, .price-table td { border: 1px solid #e5e7eb; padding: 0.75rem; text-align: left; }
-    .price-table th { background: #f3f4f6; }
-    .btn { display: inline-block; background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5rem 0.5rem 0.5rem 0; }
-    .btn:hover { background: #1d4ed8; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; line-height: 1.8; color: #1f2937; background: #f9fafb; margin: 0; padding: 0; }
+    .guide-section { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem; background: white; }
+    .guide-section h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #111827; font-weight: 800; line-height: 1.3; }
+    .guide-section h2 { font-size: 1.8rem; margin: 2.5rem 0 1.2rem; color: #2563eb; border-bottom: 3px solid #dbeafe; padding-bottom: 0.6rem; font-weight: 700; }
+    .guide-section h3 { font-size: 1.4rem; margin: 1.8rem 0 1rem; color: #1e40af; font-weight: 600; }
+    .lead { font-size: 1.25rem; color: #4b5563; line-height: 1.7; margin-bottom: 1.5rem; }
+    .step { background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%); border-left: 5px solid #2563eb; padding: 1.5rem 1.8rem; margin: 1.2rem 0; border-radius: 0 12px 12px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .step-number { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; width: 36px; height: 36px; border-radius: 50%; font-weight: 800; margin-right: 0.8rem; font-size: 1.1rem; box-shadow: 0 2px 4px rgba(37,99,235,0.3); }
+    .tip { background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border-left: 5px solid #f59e0b; padding: 1.5rem 1.8rem; margin: 1.2rem 0; border-radius: 0 12px 12px 0; }
+    .warning { background: linear-gradient(135deg, #fee2e2 0%, #fef2f2 100%); border-left: 5px solid #ef4444; padding: 1.5rem 1.8rem; margin: 1.2rem 0; border-radius: 0 12px 12px 0; }
+    .success { background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%); border-left: 5px solid #10b981; padding: 1.5rem 1.8rem; margin: 1.2rem 0; border-radius: 0 12px 12px 0; }
+    .platform-card { border: 2px solid #dbeafe; border-radius: 16px; padding: 1.8rem; margin: 1.5rem 0; background: #f8fafc; transition: transform 0.2s, box-shadow 0.2s; }
+    .platform-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+    .platform-card h3 { margin-top: 0; color: #1e40af; font-size: 1.3rem; }
+    .price-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 1.05rem; }
+    .price-table th, .price-table td { border: 1px solid #d1d5db; padding: 1rem; text-align: left; }
+    .price-table th { background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); font-weight: 600; }
+    .price-table tr:nth-child(even) { background: #f9fafb; }
+    .btn { display: inline-block; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; padding: 1rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 700; margin: 0.5rem 0.5rem 0.5rem 0; font-size: 1.05rem; transition: all 0.2s; box-shadow: 0 4px 6px rgba(37,99,235,0.2); }
+    .btn:hover { background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(37,99,235,0.3); }
     .checklist { list-style: none; padding: 0; }
-    .checklist li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
-    .checklist li:before { content: "✓"; position: absolute; left: 0; color: #10b981; font-weight: bold; }
-    code { background: #f3f4f6; padding: 0.2rem 0.5rem; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
-    .nav-link { display: inline-block; margin-top: 2rem; color: #2563eb; text-decoration: none; }
-    .nav-link:hover { text-decoration: underline; }
+    .checklist li { padding: 0.7rem 0; padding-left: 2.5rem; position: relative; font-size: 1.05rem; }
+    .checklist li:before { content: "✓"; position: absolute; left: 0; color: #10b981; font-weight: 900; font-size: 1.2rem; }
+    code { background: #f1f5f9; padding: 0.3rem 0.7rem; border-radius: 6px; font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace; font-size: 1em; color: #dc2626; border: 1px solid #e2e8f0; }
+    .nav-link { display: inline-block; margin-top: 2rem; color: #2563eb; text-decoration: none; font-weight: 600; font-size: 1.1rem; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s; }
+    .nav-link:hover { background: #eff6ff; text-decoration: none; }
+    .video-placeholder { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 16px; padding: 3rem 2rem; text-align: center; margin: 2rem 0; color: white; }
+    .video-placeholder h4 { font-size: 1.5rem; margin-bottom: 1rem; color: #60a5fa; }
+    .video-placeholder p { font-size: 1.1rem; color: #94a3b8; margin-bottom: 1.5rem; }
+    .video-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .screenshot-frame { border: 3px solid #e5e7eb; border-radius: 12px; overflow: hidden; margin: 1.5rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: white; }
+    .screenshot-frame img { width: 100%; height: auto; display: block; }
+    .screenshot-caption { background: #f9fafb; padding: 0.8rem 1.2rem; text-align: center; font-size: 0.95rem; color: #6b7280; border-top: 1px solid #e5e7eb; }
+    .highlight-box { background: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%); border: 2px dashed #7c3aed; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+    .highlight-box strong { color: #5b21b6; }
+    @media (max-width: 768px) {
+      .guide-section { padding: 1.5rem 1rem; }
+      .guide-section h1 { font-size: 2rem; }
+      .guide-section h2 { font-size: 1.5rem; }
+      .step { padding: 1.2rem 1rem; }
+      .btn { width: 100%; text-align: center; margin: 0.5rem 0; }
+    }
   </style>
 </head>
 <body>
@@ -48,39 +69,103 @@
     <h1>🔑 获取大模型 API Key 傻瓜教程</h1>
     <p class="lead">本教程一步一步带你获取阿里百炼和 MiniMax 的 API Key。不需要编程经验，跟着截图和说明操作即可。</p>
     
-    <div class="tip">
+    <div class="video-placeholder">
+      <div class="video-icon">🎥</div>
+      <h4>视频教程即将上线</h4>
+      <p>我们正在录制详细的屏幕操作视频，预计本周内发布。<br>届时你可以边看视频边操作，更加轻松易懂！</p>
+      <p style="font-size: 0.95rem; color: #64748b;">📧 想第一时间收到通知？在 Telegram 群组留言告诉我们～</p>
+    </div>
+
+    <div class="tip" style="margin-top: 2rem;">
+      <strong>📸 截图说明：</strong>
+      <p style="margin-top: 0.5rem; font-size: 0.95rem;">
+        本教程已添加真实截图！部分需要登录的页面（如 API Key 管理）暂时使用占位图，
+        因为这些页面涉及个人账户信息。我们会在本周内补充完整所有截图。
+        <br><br>
+        <strong>当前状态：</strong>✅ 4 张首页/登录页截图已就绪 &nbsp;|&nbsp; 
+        ⏳ 6 张登录后截图待补充
+      </p>
+    </div>
+    
+    <div class="highlight-box">
       <strong>💡 开始前准备：</strong>
       <ul class="checklist">
-        <li>一个手机号（用于接收验证码）</li>
-        <li>支付宝或微信（用于实名认证和充值）</li>
-        <li>大约 10-20 分钟时间</li>
+        <li>📱 一个手机号（用于接收验证码）</li>
+        <li>💳 支付宝或微信（用于实名认证和充值）</li>
+        <li>⏰ 大约 10-20 分钟时间</li>
+        <li>💻 电脑浏览器（推荐 Chrome 或 Edge）</li>
       </ul>
+    </div>
+
+    <div class="success" style="margin-top: 1.5rem;">
+      <strong>⚡ 5 分钟快速开始：</strong>
+      <p style="margin-top: 0.5rem;">赶时间？只需 3 步：</p>
+      <ol style="padding-left: 1.5rem; margin-top: 0.5rem; line-height: 1.8;">
+        <li>点击 <a href="https://bailian.console.aliyun.com/" target="_blank" style="color: #2563eb; font-weight: 600;">阿里百炼控制台</a> 并用支付宝登录</li>
+        <li>在左侧菜单找到 "API-KEY 管理" → 创建新 Key → 立即复制保存</li>
+        <li>回到 <a href="deploy.html" style="color: #2563eb; font-weight: 600;">部署指南</a> 填入 Key，完成！</li>
+      </ol>
+      <p style="margin-top: 1rem; font-size: 0.9rem; color: #6b7280;">下面是详细图文教程，每一步都有截图说明～</p>
     </div>
 
     <h2>📌 先选哪个平台？</h2>
-    <p>两个平台都可以用，主要区别：</p>
+    <p style="font-size: 1.1rem; color: #4b5563;">两个平台都可以用，主要区别如下。新手建议从阿里百炼开始！</p>
     
-    <div class="platform-card">
-      <h3>🥇 推荐新手：阿里百炼（通义千问）</h3>
-      <ul>
-        <li><strong>优点：</strong>国内访问快、中文效果好、有免费额度、文档完善</li>
-        <li><strong>推荐模型：</strong>Qwen-Max 或 Qwen-Plus（性价比高）</li>
-        <li><strong>适合：</strong>第一次尝试、日常使用、中文任务</li>
-      </ul>
+    <div style="overflow-x: auto; margin: 1.5rem 0;">
+      <table class="price-table" style="font-size: 1rem;">
+        <tr>
+          <th style="width: 25%;">对比项</th>
+          <th style="width: 37%; background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);">🥇 阿里百炼</th>
+          <th style="width: 38%; background: linear-gradient(135deg, #ede9fe 0%, #f5f3ff 100%);">🥈 MiniMax</th>
+        </tr>
+        <tr>
+          <td><strong>访问速度</strong></td>
+          <td>✅ 国内非常快</td>
+          <td>✅ 国内快</td>
+        </tr>
+        <tr>
+          <td><strong>免费额度</strong></td>
+          <td>✅ 新用户约 10-50 元</td>
+          <td>✅ 新用户有体验额度</td>
+        </tr>
+        <tr>
+          <td><strong>中文能力</strong></td>
+          <td>✅✅ 优秀（通义千问）</td>
+          <td>✅ 良好</td>
+        </tr>
+        <tr>
+          <td><strong>创意写作</strong></td>
+          <td>✅ 良好</td>
+          <td>✅✅ 优秀（擅长角色扮演）</td>
+        </tr>
+        <tr>
+          <td><strong>文档完善度</strong></td>
+          <td>✅✅ 非常完善</td>
+          <td>✅ 较完善</td>
+        </tr>
+        <tr>
+          <td><strong>推荐模型</strong></td>
+          <td><code>qwen-max</code> / <code>qwen-plus</code></td>
+          <td><code>abab6.5</code> / <code>abab6.5s</code></td>
+        </tr>
+        <tr>
+          <td><strong>适合场景</strong></td>
+          <td>日常使用、中文任务、新手入门</td>
+          <td>创意写作、角色扮演、对比测试</td>
+        </tr>
+      </table>
     </div>
 
-    <div class="platform-card">
-      <h3>🥈 备选：MiniMax（海螺 AI）</h3>
-      <ul>
-        <li><strong>优点：</strong>模型能力强、适合创意写作、角色扮演</li>
-        <li><strong>推荐模型：</strong>abab6.5 或 abab6.5s</li>
-        <li><strong>适合：</strong>需要更强创意能力、已经用过百炼想对比</li>
-      </ul>
+    <div class="highlight-box" style="text-align: center; margin: 2rem 0;">
+      <h4 style="margin-bottom: 0.5rem; color: #5b21b6; font-size: 1.2rem;">🤔 不知道怎么选？</h4>
+      <p style="margin: 0; color: #6b7280;">
+        <strong>无脑推荐：阿里百炼</strong> — 文档完善、访问稳定、免费额度够用，新手友好！
+      </p>
     </div>
 
     <div class="tip">
       <strong>💰 预算建议：</strong>
-      <ul>
+      <ul class="checklist">
         <li><strong>只想试试：</strong>先不充值，用免费额度跑通流程</li>
         <li><strong>自己日常用：</strong>充值 10-50 元够用很久（看使用频率）</li>
         <li><strong>多人测试：</strong>充值 100 元左右，注意设置额度提醒</li>
@@ -88,180 +173,363 @@
     </div>
 
     <h2 id="alibaba">🅰️ 阿里百炼 API Key 获取教程</h2>
+    <p style="font-size: 1.1rem; color: #4b5563;">阿里百炼是阿里云推出的大模型服务平台，提供通义千问系列模型的 API 访问。</p>
     
     <h3>第 1 步：访问阿里百炼官网</h3>
     <div class="step">
       <span class="step-number">1</span>
-      打开浏览器，访问 <a href="https://bailian.console.aliyun.com/" target="_blank" class="btn">阿里百炼控制台</a>
+      <strong>打开浏览器</strong>，访问下方链接：
+      <div style="margin-top: 1rem;">
+        <a href="https://bailian.console.aliyun.com/" target="_blank" class="btn">🔗 阿里百炼控制台</a>
+      </div>
+    </div>
+    <div class="screenshot-frame">
+      <img src="screenshots/01-bailian-home.png" alt="阿里百炼控制台首页" />
+      <div class="screenshot-caption">图 1：阿里百炼控制台首页</div>
     </div>
 
     <h3>第 2 步：登录/注册阿里云账号</h3>
     <div class="step">
       <span class="step-number">2</span>
-      使用手机号或支付宝登录。如果没有账号，按提示完成注册。
+      <strong>使用手机号或支付宝登录</strong>。如果没有账号，点击"免费注册"按提示完成注册。
     </div>
     <div class="tip">
-      <strong>📝 提示：</strong>需要完成实名认证才能使用 API。按页面提示上传身份证或支付宝认证即可。
+      <strong>📝 实名认证提示：</strong><br>
+      需要完成实名认证才能使用 API 服务。按页面提示选择以下任一方式：
+      <ul class="checklist" style="margin-top: 0.5rem;">
+        <li>支付宝扫码认证（最快，推荐）</li>
+        <li>上传身份证正反面</li>
+        <li>银行卡验证</li>
+      </ul>
+      整个过程约 2-5 分钟。
+    </div>
+    <div class="screenshot-frame">
+      <img src="screenshots/02-bailian-login.png" alt="阿里云登录页面" />
+      <div class="screenshot-caption">图 2：登录页面，推荐使用支付宝快捷登录</div>
     </div>
 
     <h3>第 3 步：进入 API Key 管理页面</h3>
     <div class="step">
       <span class="step-number">3</span>
-      登录后，在左侧菜单找到 <strong>"API-KEY 管理"</strong> 或 <strong>"密钥管理"</strong>，点击进入。
+      登录成功后，在页面<strong>左侧导航栏</strong>找到并点击 <strong>"API-KEY 管理"</strong>（也可能显示为"密钥管理"）。
+    </div>
+    <div class="screenshot-frame">
+      <div style="background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%); padding: 3rem 2rem; text-align: center; color: #1e40af;">
+        <span style="font-size: 3rem;">📸</span><br>
+        <strong>截图待更新</strong><br>
+        <span style="font-size: 0.9rem;">需要登录后捕获：左侧菜单中的 API-KEY 管理入口</span>
+      </div>
+      <div class="screenshot-caption">图 3：左侧菜单中的 API-KEY 管理入口（需登录后截图）</div>
     </div>
 
     <h3>第 4 步：创建新的 API Key</h3>
     <div class="step">
       <span class="step-number">4</span>
-      点击 <strong>"创建新的 API-Key"</strong> 按钮。
+      在 API-KEY 管理页面，点击 <strong>"创建新的 API-Key"</strong> 按钮（通常在页面右上角或中间位置）。
     </div>
     <div class="step">
       <span class="step-number">5</span>
-      给 Key 起个名字（比如 <code>lobster-ai</code>），然后点击确认。
+      在弹出的窗口中，给 Key 起个<strong>容易识别的名字</strong>（比如 <code>lobster-ai</code> 或 <code>my-first-key</code>），然后点击"确定"或"创建"。
+    </div>
+    <div class="screenshot-frame">
+      <div style="background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%); padding: 3rem 2rem; text-align: center; color: #1e40af;">
+        <span style="font-size: 3rem;">📸</span><br>
+        <strong>截图待更新</strong><br>
+        <span style="font-size: 0.9rem;">需要登录后捕获：创建 API Key 弹窗界面</span>
+      </div>
+      <div class="screenshot-caption">图 4：创建 API Key 弹窗（需登录后截图）</div>
     </div>
     <div class="warning">
-      <strong>⚠️ 重要：</strong>API Key 只会显示一次！创建后立即复制保存，关闭后就看不到了。如果丢失需要重新创建。
+      <strong>⚠️ 极其重要：</strong><br>
+      API Key <strong>只会显示这一次</strong>！创建成功后会立即显示完整的 Key，请：
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li>立即点击"复制"按钮</li>
+        <li>粘贴到安全的地方（密码管理器、加密笔记、或本地文本文件）</li>
+        <li>确认保存成功后再关闭页面</li>
+      </ol>
+      <strong style="color: #dc2626;">如果关闭页面，将无法再次查看完整 Key，只能删除后重新创建！</strong>
     </div>
 
     <h3>第 5 步：复制并保存 API Key</h3>
     <div class="step">
       <span class="step-number">6</span>
-      复制显示的 API Key（通常以 <code>sk-</code> 开头），粘贴到安全的地方（比如密码管理器或本地文本文件）。
+      <strong>复制 API Key</strong>（通常以 <code>sk-</code> 开头，后面跟着一长串字母数字），粘贴到你选择的安全位置。
     </div>
     <div class="success">
-      <strong>✅ 完成！</strong>你已经成功获取阿里百炼的 API Key。
+      <strong>✅ 恭喜！</strong>你已经成功获取阿里百炼的 API Key！接下来可以回到部署指南继续配置。
+    </div>
+    <div class="screenshot-frame">
+      <div style="background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%); padding: 3rem 2rem; text-align: center; color: #1e40af;">
+        <span style="font-size: 3rem;">📸</span><br>
+        <strong>截图待更新</strong><br>
+        <span style="font-size: 0.9rem;">需要登录后捕获：API Key 显示和复制界面</span>
+      </div>
+      <div class="screenshot-caption">图 5：API Key 显示页面（需登录后截图）</div>
     </div>
 
     <h3>第 6 步：开通模型服务（如需要）</h3>
     <div class="step">
       <span class="step-number">7</span>
-      在控制台找到 <strong>"模型广场"</strong> 或 <strong>"模型管理"</strong>。
+      在控制台左侧菜单找到 <strong>"模型广场"</strong> 或 <strong>"模型管理"</strong>，点击进入。
     </div>
     <div class="step">
       <span class="step-number">8</span>
-      找到 <strong>Qwen-Max</strong> 或 <strong>Qwen-Plus</strong>，点击开通。
+      在模型列表中找到 <strong>Qwen-Max</strong> 或 <strong>Qwen-Plus</strong>，点击"开通"或"启用"。
     </div>
     <div class="tip">
-      <strong>💰 关于充值：</strong>
-      <ul>
-        <li>新用户通常有免费额度（约 10-50 元等值 token）</li>
+      <strong>💰 关于充值和免费额度：</strong>
+      <ul class="checklist">
+        <li>新用户通常有<strong>免费额度</strong>（约 10-50 元等值的 token），足够测试使用</li>
         <li>免费额度用完后需要充值才能继续使用</li>
-        <li>在"费用中心"可以充值，最低一般 10 元起</li>
+        <li>在"费用中心"或"充值"页面可以充值，最低一般 10 元起</li>
+        <li>建议设置"消费提醒"，避免意外超支</li>
       </ul>
     </div>
 
     <h2 id="minimax">🅱️ MiniMax API Key 获取教程</h2>
+    <p style="font-size: 1.1rem; color: #4b5563;">MiniMax（海螺 AI）是另一家领先的大模型公司，提供强大的创意和对话能力。</p>
 
     <h3>第 1 步：访问 MiniMax 开放平台</h3>
     <div class="step">
       <span class="step-number">1</span>
-      打开浏览器，访问 <a href="https://platform.minimaxi.com/" target="_blank" class="btn">MiniMax 开放平台</a>
+      <strong>打开浏览器</strong>，访问下方链接：
+      <div style="margin-top: 1rem;">
+        <a href="https://platform.minimaxi.com/" target="_blank" class="btn">🔗 MiniMax 开放平台</a>
+      </div>
+    </div>
+    <div class="screenshot-frame">
+      <img src="screenshots/03-minimax-home.png" alt="MiniMax 开放平台首页" />
+      <div class="screenshot-caption">图 6：MiniMax 开放平台首页</div>
     </div>
 
     <h3>第 2 步：登录/注册账号</h3>
     <div class="step">
       <span class="step-number">2</span>
-      使用手机号登录。如果没有账号，按提示完成注册。
+      点击页面右上角的 <strong>"登录"</strong> 按钮，使用手机号登录。如果没有账号，点击"注册"按提示完成。
+    </div>
+    <div class="tip">
+      <strong>📝 注册提示：</strong><br>
+      输入手机号后，会收到短信验证码。输入验证码即可完成注册/登录。整个过程约 1-2 分钟。
+    </div>
+    <div class="screenshot-frame">
+      <img src="screenshots/04-minimax-login.png" alt="MiniMax 登录页面" />
+      <div class="screenshot-caption">图 7：MiniMax 登录页面，输入手机号获取验证码</div>
     </div>
 
     <h3>第 3 步：进入 API Key 管理</h3>
     <div class="step">
       <span class="step-number">3</span>
-      登录后，点击右上角头像，选择 <strong>"API 密钥管理"</strong> 或在控制台找到相关入口。
+      登录成功后，点击页面<strong>右上角的头像或用户名</strong>，在下拉菜单中选择 <strong>"API 密钥管理"</strong>。
+    </div>
+    <div class="screenshot-frame">
+      <div style="background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%); padding: 3rem 2rem; text-align: center; color: #1e40af;">
+        <span style="font-size: 3rem;">📸</span><br>
+        <strong>截图待更新</strong><br>
+        <span style="font-size: 0.9rem;">需要登录后捕获：用户菜单中的 API 密钥管理入口</span>
+      </div>
+      <div class="screenshot-caption">图 8：API 密钥管理入口（需登录后截图）</div>
     </div>
 
     <h3>第 4 步：创建 API Key</h3>
     <div class="step">
       <span class="step-number">4</span>
-      点击 <strong>"创建密钥"</strong> 按钮。
+      在 API 密钥管理页面，点击 <strong>"创建密钥"</strong> 按钮（通常在页面明显位置）。
     </div>
     <div class="step">
       <span class="step-number">5</span>
-      给密钥起个名字（比如 <code>lobster-ai</code>），设置权限（一般选默认即可），然后确认创建。
+      给密钥起个<strong>容易识别的名字</strong>（比如 <code>lobster-ai</code>），权限设置保持默认即可，然后点击"确认创建"。
+    </div>
+    <div class="screenshot-frame">
+      <div style="background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%); padding: 3rem 2rem; text-align: center; color: #1e40af;">
+        <span style="font-size: 3rem;">📸</span><br>
+        <strong>截图待更新</strong><br>
+        <span style="font-size: 0.9rem;">需要登录后捕获：创建密钥弹窗界面</span>
+      </div>
+      <div class="screenshot-caption">图 9：创建密钥弹窗（需登录后截图）</div>
     </div>
 
     <h3>第 5 步：复制并保存 API Key</h3>
     <div class="step">
       <span class="step-number">6</span>
-      复制显示的 API Key（通常以 <code>sk-</code> 开头），立即保存到安全位置。
+      <strong>复制 API Key</strong>（通常以 <code>sk-</code> 开头），立即粘贴到安全位置保存。
     </div>
     <div class="warning">
-      <strong>⚠️ 重要：</strong>和阿里百炼一样，API Key 只显示一次，关闭后无法再查看，丢失需重新创建。
+      <strong>⚠️ 极其重要：</strong><br>
+      和阿里百炼一样，MiniMax 的 API Key <strong>只会显示一次</strong>！
+      <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+        <li>创建成功后立即点击"复制"</li>
+        <li>粘贴到安全位置（密码管理器、加密笔记等）</li>
+        <li>确认保存好再关闭页面</li>
+      </ol>
+      <strong style="color: #dc2626;">关闭后无法再次查看，丢失只能重新创建！</strong>
     </div>
     <div class="success">
-      <strong>✅ 完成！</strong>你已经成功获取 MiniMax 的 API Key。
+      <strong>✅ 恭喜！</strong>你已经成功获取 MiniMax 的 API Key！
+    </div>
+    <div class="screenshot-frame">
+      <div style="background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%); padding: 3rem 2rem; text-align: center; color: #1e40af;">
+        <span style="font-size: 3rem;">📸</span><br>
+        <strong>截图待更新</strong><br>
+        <span style="font-size: 0.9rem;">需要登录后捕获：API Key 显示和复制界面</span>
+      </div>
+      <div class="screenshot-caption">图 10：API Key 显示页面（需登录后截图）</div>
     </div>
 
     <h3>第 6 步：充值（如需要）</h3>
     <div class="step">
       <span class="step-number">7</span>
-      在控制台找到 <strong>"充值"</strong> 或 <strong>"账单"</strong> 页面。
+      在控制台顶部或左侧菜单找到 <strong>"充值"</strong> 或 <strong>"账单"</strong> 页面。
     </div>
     <div class="step">
       <span class="step-number">8</span>
-      选择充值金额，完成支付。
+      选择充值金额（最低通常 10 元起），选择支付方式（微信/支付宝），完成支付。
     </div>
     <div class="tip">
       <strong>💰 MiniMax 价格参考：</strong>
-      <ul>
-        <li>abab6.5：约 0.1 元/千 tokens（输入）+ 0.3 元/千 tokens（输出）</li>
-        <li>abab6.5s：价格更低，适合日常使用</li>
+      <table class="price-table" style="margin-top: 1rem;">
+        <tr>
+          <th>模型</th>
+          <th>输入价格</th>
+          <th>输出价格</th>
+          <th>特点</th>
+        </tr>
+        <tr>
+          <td><code>abab6.5</code></td>
+          <td>约 0.1 元/千 tokens</td>
+          <td>约 0.3 元/千 tokens</td>
+          <td>能力强，适合创意写作</td>
+        </tr>
+        <tr>
+          <td><code>abab6.5s</code></td>
+          <td>约 0.05 元/千 tokens</td>
+          <td>约 0.15 元/千 tokens</td>
+          <td>性价比高，适合日常使用</td>
+        </tr>
+      </table>
+      <ul class="checklist" style="margin-top: 1rem;">
         <li>新用户可能有免费体验额度</li>
+        <li>建议设置消费提醒，避免意外超支</li>
+        <li>可以先小额充值测试，确认好用再增加</li>
       </ul>
     </div>
 
     <h2>📋 获取到 API Key 后做什么？</h2>
     
-    <div class="step">
-      <span class="step-number">✓</span>
-      <strong>回到龙虾 AI 部署页面</strong>，在配置文件中填入你的 API Key。
-    </div>
-    <div class="step">
-      <span class="step-number">✓</span>
-      <strong>选择模型</strong>：阿里百炼选 <code>qwen-max</code> 或 <code>qwen-plus</code>，MiniMax 选 <code>abab6.5</code>。
-    </div>
-    <div class="step">
-      <span class="step-number">✓</span>
-      <strong>测试连接</strong>：运行测试命令，确认 API Key 有效。
+    <div class="highlight-box">
+      <strong>🎯 下一步操作清单：</strong>
+      <ul class="checklist">
+        <li>回到 <a href="deploy.html" style="color: #7c3aed; font-weight: 600;">龙虾 AI 部署指南</a></li>
+        <li>在配置文件（通常是 <code>.env</code> 文件）中填入你的 API Key</li>
+        <li>选择模型：阿里百炼选 <code>qwen-max</code> 或 <code>qwen-plus</code>，MiniMax 选 <code>abab6.5</code></li>
+        <li>运行测试命令，确认 API Key 有效</li>
+        <li>开始使用你的 AI 打工人！🎉</li>
+      </ul>
     </div>
 
-    <h2>❓ 常见问题</h2>
+    <h2>❓ 常见问题 FAQ</h2>
     
-    <h3>Q: API Key 泄露了怎么办？</h3>
-    <div class="warning">
-      <strong>立即行动：</strong>
-      <ol>
-        <li>马上到对应平台删除/禁用这个 Key</li>
-        <li>创建一个新的 API Key</li>
-        <li>更新你的配置文件</li>
-      </ol>
+    <div class="platform-card" style="background: white; border-color: #e5e7eb;">
+      <h3 style="color: #dc2626;">Q: API Key 泄露了怎么办？</h3>
+      <div class="warning" style="margin-top: 1rem;">
+        <strong>⚠️ 立即采取以下行动：</strong>
+        <ol style="padding-left: 1.5rem; margin-top: 0.5rem;">
+          <li><strong>立即禁用：</strong>马上到对应平台删除或禁用这个 Key</li>
+          <li><strong>重新创建：</strong>创建一个新的 API Key</li>
+          <li><strong>更新配置：</strong>在你的配置文件中更新为新 Key</li>
+          <li><strong>检查使用：</strong>查看是否有异常使用记录</li>
+        </ol>
+      </div>
+      <p style="margin-top: 1rem; color: #4b5563;"><strong>💡 预防建议：</strong>不要把 API Key 上传到 GitHub、不要发给别人、不要放在公开的代码仓库里。</p>
     </div>
 
-    <h3>Q: 免费额度用完了怎么办？</h3>
-    <p>需要充值才能继续使用。建议：</p>
-    <ul>
-      <li>先充值小额（10-50 元）测试</li>
-      <li>在平台设置"额度提醒"，避免意外超支</li>
-      <li>如果用量大，可以关注平台的套餐优惠</li>
-    </ul>
+    <div class="platform-card" style="background: white; border-color: #e5e7eb;">
+      <h3 style="color: #f59e0b;">Q: 免费额度用完了怎么办？</h3>
+      <p>需要充值才能继续使用。建议：</p>
+      <ul class="checklist">
+        <li>先充值小额（10-50 元）测试，确认服务正常</li>
+        <li>在平台设置"消费提醒"或"额度预警"，避免意外超支</li>
+        <li>如果用量大，可以关注平台的套餐优惠或月付计划</li>
+        <li>定期检查使用量，了解消费情况</li>
+      </ul>
+    </div>
 
-    <h3>Q: 两个平台选哪个更好？</h3>
-    <p>建议：</p>
-    <ul>
-      <li><strong>第一次用：</strong>选阿里百炼，文档完善、访问稳定</li>
-      <li><strong>想对比效果：</strong>两个都试试，看哪个更适合你的场景</li>
-      <li><strong>预算有限：</strong>对比两个平台的定价，选性价比高的</li>
-    </ul>
+    <div class="platform-card" style="background: white; border-color: #e5e7eb;">
+      <h3 style="color: #2563eb;">Q: 两个平台选哪个更好？</h3>
+      <p>根据你的需求选择：</p>
+      <table class="price-table" style="margin-top: 1rem;">
+        <tr>
+          <th>场景</th>
+          <th>推荐平台</th>
+          <th>理由</th>
+        </tr>
+        <tr>
+          <td>第一次使用</td>
+          <td>阿里百炼</td>
+          <td>文档完善、访问稳定、中文支持好</td>
+        </tr>
+        <tr>
+          <td>想对比效果</td>
+          <td>两个都试</td>
+          <td>不同模型有不同特点，可以对比选择</td>
+        </tr>
+        <tr>
+          <td>预算有限</td>
+          <td>对比定价</td>
+          <td>查看两个平台的最新定价，选性价比高的</td>
+        </tr>
+        <tr>
+          <td>创意写作</td>
+          <td>MiniMax</td>
+          <td>在创意和角色扮演方面表现更强</td>
+        </tr>
+      </table>
+    </div>
 
-    <h3>Q: API Key 填到哪里？</h3>
-    <p>在龙虾 AI 的配置文件中，通常是 <code>.env</code> 文件或部署脚本里的配置项。具体位置参考 <a href="deploy.html">部署指南</a>。</p>
+    <div class="platform-card" style="background: white; border-color: #e5e7eb;">
+      <h3 style="color: #10b981;">Q: API Key 填到哪里？</h3>
+      <p>在龙虾 AI 的配置文件中，通常是以下位置之一：</p>
+      <ul style="padding-left: 1.5rem; line-height: 2;">
+        <li><code>.env</code> 文件中的 <code>API_KEY=sk-xxxxx</code></li>
+        <li>部署脚本里的配置变量</li>
+        <li>Vercel 环境变量设置页面</li>
+      </ul>
+      <p style="margin-top: 1rem;">具体位置请参考 <a href="deploy.html" style="color: #2563eb; font-weight: 600;">部署指南</a>。</p>
+    </div>
 
-    <a href="deploy.html" class="nav-link">← 返回部署指南</a>
-    <a href="index.html" class="nav-link">返回首页</a>
+    <div class="platform-card" style="background: white; border-color: #e5e7eb;">
+      <h3 style="color: #7c3aed;">Q: 为什么我的 API Key 不能用？</h3>
+      <p>检查以下几点：</p>
+      <ul class="checklist">
+        <li>确认 Key 复制完整（没有漏掉字符或多空格）</li>
+        <li>确认模型服务已开通（在平台模型管理页面检查）</li>
+        <li>确认账户有可用额度（免费额度或已充值）</li>
+        <li>确认网络正常（国内平台需要大陆网络访问）</li>
+        <li>检查错误信息，根据提示排查问题</li>
+      </ul>
+    </div>
+
+    <div class="highlight-box" style="margin-top: 2rem; text-align: center;">
+      <h4 style="margin-bottom: 1rem; color: #5b21b6; font-size: 1.3rem;">🎥 视频教程即将上线</h4>
+      <p style="margin-bottom: 1rem;">我们正在录制详细的屏幕操作视频，包括：</p>
+      <ul style="text-align: left; display: inline-block; margin: 0 auto;">
+        <li>完整的注册和认证流程</li>
+        <li>每一步的屏幕操作演示</li>
+        <li>常见问题现场解决</li>
+        <li>配置和测试全过程</li>
+      </ul>
+      <p style="margin-top: 1rem; color: #6b7280; font-size: 0.95rem;">📧 想第一时间收到通知？在 Telegram 群组留言告诉我们～</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 2.5rem; padding-top: 2rem; border-top: 2px solid #e5e7eb;">
+      <a href="deploy.html" class="nav-link">← 返回部署指南</a>
+      <a href="index.html" class="nav-link" style="margin-left: 1rem;">返回首页</a>
+      <a href="faq.html" class="nav-link" style="margin-left: 1rem;">常见问题 →</a>
+    </div>
   </main>
 
-  <footer>
-    <p>🦞 龙虾 AI 打工人 — 让 AI 为你工作</p>
+  <footer style="background: #1f2937; color: white; padding: 2rem 1.5rem; text-align: center; margin-top: 3rem;">
+    <p style="font-size: 1.1rem; margin: 0;">🦞 龙虾 AI 打工人 — 让 AI 为你工作</p>
+    <p style="color: #9ca3af; margin-top: 0.5rem; font-size: 0.9rem;">有任何问题？在 Telegram 群组联系我们～</p>
   </footer>
 </body>
 </html>
